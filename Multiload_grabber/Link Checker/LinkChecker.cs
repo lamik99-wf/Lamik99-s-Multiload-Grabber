@@ -43,19 +43,22 @@ namespace MultiloadGrabber
         const string filefactoryEnd = "</table>";
         //splitter, OK and Dead not requied since it doesn't show dead links
 
+        const string sharerapidOk = "Nahrán na server:";
+
         public static bool[] CheckUlozTo(string[] links)
         {
             string urls = "urls=";
-            foreach (string s in links)
-                urls += (s + "\r\n");
+            for (int i=0;i<links.Length;i++)
+            {
+                links[i] = links[i].Substring(0, links[i].LastIndexOf('/'));
+                urls += (links[i] + "\r\n");
+            }
             urls.Trim();
             string res = NetworkHandler.SendPost(uloztoChecker, urls);
             int beg = res.IndexOf(uloztoBegin);
             int end = res.IndexOf(uloztoEnd, beg);
             res = res.Substring(beg + uloztoBegin.Length, end - beg - uloztoBegin.Length);
             string[] spl = res.Split(uloztoSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in spl)
-                DebugLog.Zapis(s);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
@@ -80,13 +83,10 @@ namespace MultiloadGrabber
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(hellshareChecker, urls);
-            DebugLog.Zapis(res);
             int beg = res.IndexOf(hellshareBegin);
             int end = res.IndexOf(hellshareEnd, beg);
             res = res.Substring(beg + hellshareBegin.Length, end - beg - hellshareBegin.Length);
             string[] spl = res.Split(hellshareSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in spl)
-                DebugLog.Zapis(s);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
@@ -111,13 +111,10 @@ namespace MultiloadGrabber
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(multishareChecker, urls);
-            DebugLog.Zapis(res);
             int beg = res.IndexOf(multishareBegin);
             int end = res.IndexOf(multishareEnd, beg);
             res = res.Substring(beg + multishareBegin.Length, end - beg - multishareBegin.Length);
             string[] spl = res.Split(multishareSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in spl)
-                DebugLog.Zapis(s);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
@@ -128,6 +125,14 @@ namespace MultiloadGrabber
             return ret;
         }
 
+        public static bool CheckShareRapid(string link)
+        {
+            if (NetworkHandler.getPageSource(link).IndexOf(sharerapidOk) != -1)
+                return true;
+            else return false;
+        }
+            
+
         public static bool[] CheckQuickShare(string[] links)
         {
             string urls = "linky=";
@@ -135,13 +140,10 @@ namespace MultiloadGrabber
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(quickshareChecker, urls);
-            DebugLog.Zapis(res);
             int beg = res.IndexOf(quickshareBegin);
             int end = res.IndexOf(quickshareEnd, beg);
             res = res.Substring(beg + quickshareBegin.Length, end - beg - quickshareBegin.Length);
             string[] spl = res.Split(quickshareSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in spl)
-                DebugLog.Zapis(s);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
@@ -161,13 +163,17 @@ namespace MultiloadGrabber
             string res = NetworkHandler.SendPost(filefactoryChecker, urls);
             int beg = res.IndexOf(filefactoryBegin);
             int end = res.IndexOf(filefactoryEnd, beg);
-            res = res.Substring(beg + filefactoryBegin.Length, end - beg - filefactoryBegin.Length).Replace('.', '_'); // FileFactory does this automatically
-            //in filenames, this is the easiest way to match it
-            DebugLog.Zapis(res);
+            try
+            {
+                res = res.Substring(beg + filefactoryBegin.Length, end - beg - filefactoryBegin.Length).Replace('.', '_'); // FileFactory does this automatically
+                //in filenames, this is the easiest way to match it
+            }
+            catch (Exception)
+            { }
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
-                if (res.IndexOf(links[i].Replace('.', '_')) != -1)
+                if (res.IndexOf(links[i].Replace('.', '_')) != -1 && links[i]!="-")
                     ret[i] = true;
                 else ret[i] = false;
             }
@@ -200,6 +206,8 @@ namespace MultiloadGrabber
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < ret.Length; i++)
             {
+                if (resp[i].Trim() == "")
+                    continue;
                 string[] t = resp[i].Split(',');
                 if (t[4] == "1" || t[4] == "5")
                     ret[i] = true;
@@ -207,5 +215,6 @@ namespace MultiloadGrabber
             }                
             return ret;
         }
+
     }
 }

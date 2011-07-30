@@ -71,13 +71,13 @@
             this.menuOddelovac1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuKonec = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.nastaveníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkCheckerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nápovědaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zkontrolovatAktualizaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugTestyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.nastaveníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkCheckerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grabber.SuspendLayout();
             this.MoznostiPanel.SuspendLayout();
             this.templateListPanel.SuspendLayout();
@@ -336,7 +336,7 @@
             this.odstranitŠablonuToolStripMenuItem,
             this.přejmenovatŠablonuToolStripMenuItem});
             this.sablonaListContextMenu.Name = "contextMenuStrip1";
-            this.sablonaListContextMenu.Size = new System.Drawing.Size(187, 92);
+            this.sablonaListContextMenu.Size = new System.Drawing.Size(187, 70);
             this.sablonaListContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.sablonaListContextMenu_Opening);
             // 
             // novaSablonaContextMenu
@@ -511,40 +511,6 @@
             this.menuStrip1.Text = "Menu";
             this.menuStrip1.ClientSizeChanged += new System.EventHandler(this.Form1_ResizeEnd);
             // 
-            // nápovědaToolStripMenuItem
-            // 
-            this.nápovědaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zkontrolovatAktualizaceToolStripMenuItem,
-            this.oProgramuToolStripMenuItem,
-            this.debugTestyToolStripMenuItem});
-            this.nápovědaToolStripMenuItem.Name = "nápovědaToolStripMenuItem";
-            this.nápovědaToolStripMenuItem.Size = new System.Drawing.Size(73, 19);
-            this.nápovědaToolStripMenuItem.Text = "Nápověda";
-            // 
-            // zkontrolovatAktualizaceToolStripMenuItem
-            // 
-            this.zkontrolovatAktualizaceToolStripMenuItem.Name = "zkontrolovatAktualizaceToolStripMenuItem";
-            this.zkontrolovatAktualizaceToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.zkontrolovatAktualizaceToolStripMenuItem.Text = "Zkontrolovat aktualizace";
-            // 
-            // oProgramuToolStripMenuItem
-            // 
-            this.oProgramuToolStripMenuItem.Name = "oProgramuToolStripMenuItem";
-            this.oProgramuToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.oProgramuToolStripMenuItem.Text = "O programu";
-            // 
-            // debugTestyToolStripMenuItem
-            // 
-            this.debugTestyToolStripMenuItem.Name = "debugTestyToolStripMenuItem";
-            this.debugTestyToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.debugTestyToolStripMenuItem.Text = "Debug testy";
-            this.debugTestyToolStripMenuItem.Click += new System.EventHandler(this.debugTestyToolStripMenuItem_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "*.dat";
-            this.openFileDialog1.Filter = "Soubory šablon|*.dat";
-            // 
             // nastaveníToolStripMenuItem
             // 
             this.nastaveníToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -560,14 +526,51 @@
             this.linkCheckerToolStripMenuItem.Text = "Link Checker";
             this.linkCheckerToolStripMenuItem.Click += new System.EventHandler(this.linkCheckerToolStripMenuItem_Click);
             // 
+            // nápovědaToolStripMenuItem
+            // 
+            this.nápovědaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zkontrolovatAktualizaceToolStripMenuItem,
+            this.oProgramuToolStripMenuItem,
+            this.debugTestyToolStripMenuItem});
+            this.nápovědaToolStripMenuItem.Name = "nápovědaToolStripMenuItem";
+            this.nápovědaToolStripMenuItem.Size = new System.Drawing.Size(73, 19);
+            this.nápovědaToolStripMenuItem.Text = "Nápověda";
+            // 
+            // zkontrolovatAktualizaceToolStripMenuItem
+            // 
+            this.zkontrolovatAktualizaceToolStripMenuItem.Name = "zkontrolovatAktualizaceToolStripMenuItem";
+            this.zkontrolovatAktualizaceToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.zkontrolovatAktualizaceToolStripMenuItem.Text = "Zkontrolovat aktualizace";
+            this.zkontrolovatAktualizaceToolStripMenuItem.Click += new System.EventHandler(this.zkontrolovatAktualizaceToolStripMenuItem_Click);
+            // 
+            // oProgramuToolStripMenuItem
+            // 
+            this.oProgramuToolStripMenuItem.Name = "oProgramuToolStripMenuItem";
+            this.oProgramuToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.oProgramuToolStripMenuItem.Text = "O programu";
+            this.oProgramuToolStripMenuItem.Click += new System.EventHandler(this.oProgramuToolStripMenuItem_Click);
+            // 
+            // debugTestyToolStripMenuItem
+            // 
+            this.debugTestyToolStripMenuItem.Name = "debugTestyToolStripMenuItem";
+            this.debugTestyToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.debugTestyToolStripMenuItem.Text = "Debug testy";
+            this.debugTestyToolStripMenuItem.Visible = false;
+            this.debugTestyToolStripMenuItem.Click += new System.EventHandler(this.debugTestyToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "*.dat";
+            this.openFileDialog1.Filter = "Soubory šablon|*.dat";
+            // 
             // hlavniOkno1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 376);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.templateEditPanel);
             this.Controls.Add(this.grabber);
+            this.Controls.Add(this.templateEditPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(952, 410);

@@ -471,8 +471,27 @@ namespace MultiloadGrabber
 
         private void linkCheckerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form form1 = new LinkChecker();
+            Form form1 = new LinkCheckerForm();
             form1.ShowDialog();
+        }
+
+        private void oProgramuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form about = new AboutBox1();
+            about.ShowDialog();
+        }
+
+        private void zkontrolovatAktualizaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            const string changelogURL = "http://mlgrabber.php5.cz/changelog.txt";
+            string s = NetworkHandler.getPageSource(changelogURL);
+            string[] spl = s.Split('\n');
+            if (spl.Length > 0 && spl[0].Trim() != System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
+            {
+                if (MessageBox.Show("Nová verze programu je k dispozici! Chcete přejít na domovskou stránku programu?", "Nová verze k dispozici", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    System.Diagnostics.Process.Start("http://sourceforge.net/projects/mlgrabber/");
+            }
+            else MessageBox.Show("Vaše verze programu je aktuální!");
         }
     }     
 

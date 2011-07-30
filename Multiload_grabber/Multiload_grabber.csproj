@@ -15,6 +15,8 @@
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <StartupObject>MultiloadGrabber.Program</StartupObject>
+    <ApplicationIcon>multiload.ico</ApplicationIcon>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,8 +31,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <StartupObject>MultiloadGrabber.Program</StartupObject>
-    <ApplicationIcon>multiload.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox1.Designer.cs">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Grabber\Parser.cs" />
     <Compile Include="Link Checker\LinkCheckerWindow.cs">
       <SubType>Form</SubType>
@@ -89,6 +95,9 @@
     <Compile Include="Templates\TemplateTable.cs" />
     <Compile Include="Templates\Template.cs" />
     <Compile Include="Templates\TemplateLoaderSaver.cs" />
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Link Checker\LinkCheckerWindow.resx">
       <DependentUpon>LinkCheckerWindow.cs</DependentUpon>
     </EmbeddedResource>

@@ -49,6 +49,7 @@ namespace MultiloadGrabber
                 System.IO.Directory.CreateDirectory(Application.StartupPath + "/data");
             System.IO.Stream proud = new System.IO.FileStream(Application.StartupPath + "/data/TemplateList.dat", System.IO.FileMode.Create, System.IO.FileAccess.Write);
             System.Runtime.Serialization.IFormatter formater = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            formater.Binder = new TemplateSupportDeserializationBinder();
             try
             {
                 formater.Serialize(proud, tabulka);
@@ -66,6 +67,7 @@ namespace MultiloadGrabber
             {
                 System.IO.Stream proud = new System.IO.FileStream(Application.StartupPath + "/data/TemplateList.dat", System.IO.FileMode.Open, System.IO.FileAccess.Read);
                 System.Runtime.Serialization.IFormatter formater = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                formater.Binder = new TemplateSupportDeserializationBinder();
                 try
                 {
                     tabulka = (List<Dvojice>)formater.Deserialize(proud);

@@ -16,6 +16,7 @@ namespace MultiloadGrabber
         {
             System.IO.Stream proud = new System.IO.FileStream(filename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
             System.Runtime.Serialization.IFormatter formater = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            formater.Binder = new TemplateSupportDeserializationBinder();
             Template sabl = null;
             try
             {

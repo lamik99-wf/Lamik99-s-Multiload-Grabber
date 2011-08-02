@@ -50,13 +50,19 @@ namespace MultiloadGrabber
             string urls = "urls=";
             for (int i=0;i<links.Length;i++)
             {
+                if (links[i] == "-")
+                    continue;
                 links[i] = links[i].Substring(0, links[i].LastIndexOf('/'));
                 urls += (links[i] + "\r\n");
             }
             urls.Trim();
             string res = NetworkHandler.SendPost(uloztoChecker, urls);
             int beg = res.IndexOf(uloztoBegin);
+            if (beg == -1)
+                return new bool[links.Length];
             int end = res.IndexOf(uloztoEnd, beg);
+            if (end == -1 || end < beg)
+                return new bool[links.Length];
             res = res.Substring(beg + uloztoBegin.Length, end - beg - uloztoBegin.Length);
             string[] spl = res.Split(uloztoSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
             bool[] ret = new bool[links.Length];
@@ -84,7 +90,11 @@ namespace MultiloadGrabber
             urls.Trim();
             string res = NetworkHandler.SendPost(hellshareChecker, urls);
             int beg = res.IndexOf(hellshareBegin);
+            if (beg == -1)
+                return new bool[links.Length];                
             int end = res.IndexOf(hellshareEnd, beg);
+            if (end == -1 || end < beg)
+                return new bool[links.Length];
             res = res.Substring(beg + hellshareBegin.Length, end - beg - hellshareBegin.Length);
             string[] spl = res.Split(hellshareSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
             bool[] ret = new bool[links.Length];
@@ -196,6 +206,8 @@ namespace MultiloadGrabber
                 fileids.Add(Convert.ToUInt64(t[t.Length - 2]));
                 filenames.Add(t[t.Length - 1]);
             }
+            if (fileids.Count == 0)
+                return new bool[links.Length];
             foreach (UInt64 i in fileids)
                 url += i + ",";
             url = url.TrimEnd(',') + "&filenames=";
@@ -209,7 +221,7 @@ namespace MultiloadGrabber
                 if (resp[i].Trim() == "")
                     continue;
                 string[] t = resp[i].Split(',');
-                if (t[4] == "1" || t[4] == "5")
+                if (t.Length > 4 && (t[4] == "1" || t[4] == "5"))
                     ret[i] = true;
                 else ret[i] = false;
             }                

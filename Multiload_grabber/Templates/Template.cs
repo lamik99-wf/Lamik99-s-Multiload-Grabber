@@ -46,6 +46,11 @@ namespace MultiloadGrabber
         }
     }
 
+    /// <summary>
+    /// Older templates/template tables have different class names. Since the files are still in the old format, the following piece of
+    /// code is needed to secure the backward compatibility.
+    /// </summary>
+
     public sealed class TemplateSupportDeserializationBinder : System.Runtime.Serialization.SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName)
@@ -54,18 +59,6 @@ namespace MultiloadGrabber
 
             typeName = typeName.Replace("WindowsFormsApplication1.SablonaTable+Dvojice", "MultiloadGrabber.TemplateTable+Dvojice");
             typeName = typeName.Replace("WindowsFormsApplication1.Sablona", "MultiloadGrabber.Template");
-
-            /*if (typeName == "WindowsFormsApplication1.Sablona")
-                typeName = "MultiloadGrabber.Template";
-
-            if (typeName == "WindowsFormsApplication1.SablonaTable")
-                typeName = "MultiloadGrabber.TemplateTable";
-
-            if (typeName == "WindowsFormsApplication.Dvojice")
-                typeName = "MultiloadGrabber.Dvojice";*/
-
-            
-
 
             typeToDeserialize = Type.GetType(String.Format("{0}, {1}",
                     typeName, assemblyName));

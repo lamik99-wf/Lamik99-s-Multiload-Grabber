@@ -65,10 +65,6 @@
             this.textSablony = new System.Windows.Forms.GroupBox();
             this.templateEditBox = new System.Windows.Forms.TextBox();
             this.menuSoubor = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuTemplates = new System.Windows.Forms.ToolStripMenuItem();
-            this.přidatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuOddelovac1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuKonec = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.nastaveníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +74,10 @@
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugTestyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.menuOddelovac1 = new System.Windows.Forms.ToolStripSeparator();
+            this.přidatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.grabber.SuspendLayout();
             this.MoznostiPanel.SuspendLayout();
             this.templateListPanel.SuspendLayout();
@@ -462,38 +462,10 @@
             this.menuSoubor.Size = new System.Drawing.Size(65, 19);
             this.menuSoubor.Text = "Program";
             // 
-            // menuTemplates
-            // 
-            this.menuTemplates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.přidatToolStripMenuItem,
-            this.importToolStripMenuItem});
-            this.menuTemplates.Name = "menuTemplates";
-            this.menuTemplates.Size = new System.Drawing.Size(116, 22);
-            this.menuTemplates.Text = "Šablony";
-            // 
-            // přidatToolStripMenuItem
-            // 
-            this.přidatToolStripMenuItem.Name = "přidatToolStripMenuItem";
-            this.přidatToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.přidatToolStripMenuItem.Text = "Editace";
-            this.přidatToolStripMenuItem.Click += new System.EventHandler(this.přidatToolStripMenuItem_Click);
-            // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.importToolStripMenuItem.Text = "Import";
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
-            // 
-            // menuOddelovac1
-            // 
-            this.menuOddelovac1.Name = "menuOddelovac1";
-            this.menuOddelovac1.Size = new System.Drawing.Size(113, 6);
-            // 
             // menuKonec
             // 
             this.menuKonec.Name = "menuKonec";
-            this.menuKonec.Size = new System.Drawing.Size(116, 22);
+            this.menuKonec.Size = new System.Drawing.Size(152, 22);
             this.menuKonec.Text = "Konec";
             this.menuKonec.Click += new System.EventHandler(this.MenuKonec_Click);
             // 
@@ -563,6 +535,34 @@
             this.openFileDialog1.FileName = "*.dat";
             this.openFileDialog1.Filter = "Soubory šablon|*.dat";
             // 
+            // menuOddelovac1
+            // 
+            this.menuOddelovac1.Name = "menuOddelovac1";
+            this.menuOddelovac1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // přidatToolStripMenuItem
+            // 
+            this.přidatToolStripMenuItem.Name = "přidatToolStripMenuItem";
+            this.přidatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.přidatToolStripMenuItem.Text = "Editace";
+            this.přidatToolStripMenuItem.Click += new System.EventHandler(this.přidatToolStripMenuItem_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // menuTemplates
+            // 
+            this.menuTemplates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.přidatToolStripMenuItem,
+            this.importToolStripMenuItem});
+            this.menuTemplates.Name = "menuTemplates";
+            this.menuTemplates.Size = new System.Drawing.Size(152, 22);
+            this.menuTemplates.Text = "Šablony";
+            // 
             // hlavniOkno1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -631,9 +631,6 @@
         private System.Windows.Forms.Button sablonaHotovoButton;
         private System.Windows.Forms.ContextMenuStrip sablonaListContextMenu;
         private System.Windows.Forms.ToolStripMenuItem menuSoubor;
-        private System.Windows.Forms.ToolStripMenuItem menuTemplates;
-        private System.Windows.Forms.ToolStripMenuItem přidatToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator menuOddelovac1;
         private System.Windows.Forms.ToolStripMenuItem menuKonec;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem novaSablonaContextMenu;
@@ -646,12 +643,15 @@
         private System.Windows.Forms.ToolStripMenuItem zkontrolovatAktualizaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oProgramuToolStripMenuItem;
         private System.Windows.Forms.RadioButton foldersOnly;
-        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem přejmenovatŠablonuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugTestyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nastaveníToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem linkCheckerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuTemplates;
+        private System.Windows.Forms.ToolStripMenuItem přidatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator menuOddelovac1;
     }
 }
 

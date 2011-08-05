@@ -10,6 +10,7 @@
 	FClose($soubor);	//just statistics, not important
 	for ($j = 2; $j < 10; ++$j) // yet, max was 8
 	{
+		if ($j == 8) continue; //who knows what this server is... perharps one of the cancelled ones
 		for ($i = 0; $i < count($input); ++$i)
 		{		
 			$s = "http://www.multiload.cz/html/stahnout_process.php?akce=download&id={$input[$i]}&server={$j}";

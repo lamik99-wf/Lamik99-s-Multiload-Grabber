@@ -226,8 +226,18 @@ namespace MultiloadGrabber
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
         {
-            templateEditPanel.Height = grabber.Height = FindForm().Height - 73;
-            grabber.Width = templateEditPanel.Width = FindForm().Width - 32;
+            templateEditPanel.Height = FindForm().Height - 88;
+            templateEditPanel.Width = FindForm().Width - 40;
+            grabber.Height = FindForm().Height - 73;
+            textSablony.Height = grabber.Height - 43;
+            textSablony.Width = grabber.Width - 250;
+            groupBox4.Height = templateEditPanel.Height - 60;
+            groupBox4.Left = sablonaHotovoButton.Left = grabber.Width - groupBox4.Width - 15;
+            templateEditList.Height = groupBox4.Height - 15;
+            templateEditBox.Height = templateEditPanel.Height - 50;
+            templateEditBox.Width = templateEditPanel.Width - 250;
+            sablonaHotovoButton.Top = templateEditPanel.Height - 35;
+            grabber.Width = FindForm().Width - 32;
             MoznostiPanel.Left = generuj.Left = (grabber.Width / 2) - 72;
             generuj.Top = grabber.Height - 39;
             multiLoadLinky.Height = grabber.Height - 28;

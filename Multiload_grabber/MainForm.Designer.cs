@@ -65,6 +65,10 @@
             this.textSablony = new System.Windows.Forms.GroupBox();
             this.templateEditBox = new System.Windows.Forms.TextBox();
             this.menuSoubor = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTemplates = new System.Windows.Forms.ToolStripMenuItem();
+            this.přidatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOddelovac1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuKonec = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.nastaveníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,10 +78,6 @@
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugTestyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.menuOddelovac1 = new System.Windows.Forms.ToolStripSeparator();
-            this.přidatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.grabber.SuspendLayout();
             this.MoznostiPanel.SuspendLayout();
             this.templateListPanel.SuspendLayout();
@@ -462,10 +462,38 @@
             this.menuSoubor.Size = new System.Drawing.Size(65, 19);
             this.menuSoubor.Text = "Program";
             // 
+            // menuTemplates
+            // 
+            this.menuTemplates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.přidatToolStripMenuItem,
+            this.importToolStripMenuItem});
+            this.menuTemplates.Name = "menuTemplates";
+            this.menuTemplates.Size = new System.Drawing.Size(116, 22);
+            this.menuTemplates.Text = "Šablony";
+            // 
+            // přidatToolStripMenuItem
+            // 
+            this.přidatToolStripMenuItem.Name = "přidatToolStripMenuItem";
+            this.přidatToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.přidatToolStripMenuItem.Text = "Editace";
+            this.přidatToolStripMenuItem.Click += new System.EventHandler(this.přidatToolStripMenuItem_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // menuOddelovac1
+            // 
+            this.menuOddelovac1.Name = "menuOddelovac1";
+            this.menuOddelovac1.Size = new System.Drawing.Size(113, 6);
+            // 
             // menuKonec
             // 
             this.menuKonec.Name = "menuKonec";
-            this.menuKonec.Size = new System.Drawing.Size(152, 22);
+            this.menuKonec.Size = new System.Drawing.Size(116, 22);
             this.menuKonec.Text = "Konec";
             this.menuKonec.Click += new System.EventHandler(this.MenuKonec_Click);
             // 
@@ -494,7 +522,7 @@
             // linkCheckerToolStripMenuItem
             // 
             this.linkCheckerToolStripMenuItem.Name = "linkCheckerToolStripMenuItem";
-            this.linkCheckerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.linkCheckerToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.linkCheckerToolStripMenuItem.Text = "Link Checker";
             this.linkCheckerToolStripMenuItem.Click += new System.EventHandler(this.linkCheckerToolStripMenuItem_Click);
             // 
@@ -535,42 +563,14 @@
             this.openFileDialog1.FileName = "*.dat";
             this.openFileDialog1.Filter = "Soubory šablon|*.dat";
             // 
-            // menuOddelovac1
-            // 
-            this.menuOddelovac1.Name = "menuOddelovac1";
-            this.menuOddelovac1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // přidatToolStripMenuItem
-            // 
-            this.přidatToolStripMenuItem.Name = "přidatToolStripMenuItem";
-            this.přidatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.přidatToolStripMenuItem.Text = "Editace";
-            this.přidatToolStripMenuItem.Click += new System.EventHandler(this.přidatToolStripMenuItem_Click);
-            // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importToolStripMenuItem.Text = "Import";
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
-            // 
-            // menuTemplates
-            // 
-            this.menuTemplates.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.přidatToolStripMenuItem,
-            this.importToolStripMenuItem});
-            this.menuTemplates.Name = "menuTemplates";
-            this.menuTemplates.Size = new System.Drawing.Size(152, 22);
-            this.menuTemplates.Text = "Šablony";
-            // 
             // hlavniOkno1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 376);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.grabber);
             this.Controls.Add(this.templateEditPanel);
+            this.Controls.Add(this.grabber);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(952, 410);

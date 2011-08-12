@@ -439,6 +439,7 @@ namespace MultiloadGrabber
         private void přejmenovatŠablonuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool okay = true;
+            Template templ = null;
             if (templateEditList.SelectedIndex >= 0 && templateEditList.SelectedIndex < templateEditList.Items.Count)
             {
                 string name = Dialogy.InputDialogBox.Show("Zadejte nové jméno pro šablonu " + templateEditList.SelectedItem.ToString(), "", "Multiload Grabber");
@@ -447,7 +448,7 @@ namespace MultiloadGrabber
                     int a = tmpTable.VratID(templateEditList.SelectedItem.ToString());
                     if (a >= 0 && System.IO.File.Exists(Application.StartupPath + @"/data/Template" + a + ".dat"))
                     {
-                        Template templ = TemplateGetterSetter.GetTemplate(Application.StartupPath + @"/data/Template" + a + ".dat");
+                        templ = TemplateGetterSetter.GetTemplate(Application.StartupPath + @"/data/Template" + a + ".dat");
                         templ.Nazev = name;
                         System.IO.File.Delete(Application.StartupPath + @"/data/Template" + a + ".dat");
                         tmpTable.DeleteTemplate(templateEditList.SelectedItem.ToString());
@@ -462,6 +463,14 @@ namespace MultiloadGrabber
                 else okay = false;
             }
             else okay = false;
+            if (okay && templ != null)
+            {
+                MessageBox.Show("Šablona " + templ.Nazev + " byla úspěšně přejmenována.");
+            }
+            else
+            {
+                MessageBox.Show("Přejmenování šablony se nezdařilo.");
+            }
         }
 
         private void debugTestyToolStripMenuItem_Click(object sender, EventArgs e)

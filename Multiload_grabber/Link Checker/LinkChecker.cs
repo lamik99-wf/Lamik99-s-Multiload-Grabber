@@ -41,7 +41,7 @@ namespace MultiloadGrabber
         const string filefactoryChecker = "http://filefactory.com/tool/links.php";
         const string filefactoryBegin = "<h1>Link Checker</h1>";
         const string filefactoryEnd = "</table>";
-        //splitter, OK and Dead not requied since it doesn't show dead links
+        //splitter, OK and Dead not requied since it doesn't show any dead links
 
         const string sharerapidOk = "Nahrán na server:";
 

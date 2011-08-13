@@ -14,13 +14,13 @@
 	8 ... ??????
 	9 ... FileFactory
 	... still place for 20 more servers in 32bit ;)*/
-	/*$soubor = FOpen("count.txt","r");
+	$soubor = FOpen("count.txt","r");
 	$pocet = FRead($soubor,FileSize("count.txt"));
 	$pocet += count($input);
 	FClose($soubor);
 	$soubor = FOpen("count.txt","w");
 	FWrite($soubor, $pocet);
-	FClose($soubor);	//just statistics, not important*/
+	FClose($soubor);	//just statistics, not important
 	
 	//decrypting the servers hash + backwards compatibility
 	if ($serv==0)
@@ -30,7 +30,8 @@
 	$str = strrev($str);
 	for ($j = 2; $j <=$servcount; ++$j)
 	{
-		if ($j == 8 || j >= strlen($str) || $str[$j-1]!='1') continue; //who knows what the server 8 is... perharps one of the cancelled ones
+		if ($j == 8 || j >= strlen($str) || $str[$j-1]!='1') continue;  //who knows what the server 8 is... perharps one of the cancelled ones
+																		//do I need the server? If not, continue
 		for ($i = 0; $i < count($input); ++$i)
 		{		
 			$s = "http://www.multiload.cz/html/stahnout_process.php?akce=download&id={$input[$i]}&server={$j}";

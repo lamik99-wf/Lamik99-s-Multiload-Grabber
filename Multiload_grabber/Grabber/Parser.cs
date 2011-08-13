@@ -20,7 +20,7 @@ namespace MultiloadGrabber
         public List<string> ulozto;
         public List<string> filefactory;
         const string textAreaZahlavi = "<textarea onclick=\"this.select()\" cols=\"50\" rows=\"10\">";
-        const string serverURL = @"http://mlgrabber.php5.cz/ServerSide.php?";
+        const string serverURL = @"http://mlgrabber.php5.cz/index.php?";
 
         public Parser()
         {

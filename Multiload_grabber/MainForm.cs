@@ -250,6 +250,8 @@ namespace MultiloadGrabber
                 templateList.Items.Add(s);
             if (templateList.Items.Count != 0)
                 templateList.Text = templateList.Items[0].ToString();
+            zkontrolovatAktualizaceToolStripMenuItem_Click(this, null);
+
         }
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
@@ -538,7 +540,11 @@ namespace MultiloadGrabber
                 if (MessageBox.Show("Nová verze programu je k dispozici! Chcete přejít na domovskou stránku programu?", "Nová verze k dispozici", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     System.Diagnostics.Process.Start("http://sourceforge.net/projects/mlgrabber/");
             }
-            else MessageBox.Show("Vaše verze programu je aktuální!");
+            else
+            {
+                if (sender is System.Windows.Forms.ToolStripMenuItem)
+                    MessageBox.Show("Vaše verze programu je aktuální!");
+            }
         }
     }     
 

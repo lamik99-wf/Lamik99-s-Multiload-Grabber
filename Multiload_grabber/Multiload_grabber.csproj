@@ -117,6 +117,7 @@
     <EmbeddedResource Include="SimpleInputDialog.resx">
       <DependentUpon>SimpleInputDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Network Communication\ServerSide.php" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -129,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="multiload.ico" />
-    <Content Include="Network Communication\ServerSide.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

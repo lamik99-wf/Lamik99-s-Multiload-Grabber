@@ -30,27 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(hlavniOkno1));
-            this.generuj = new System.Windows.Forms.Button();
-            this.inputLinks = new System.Windows.Forms.TextBox();
-            this.grabber = new System.Windows.Forms.GroupBox();
-            this.MoznostiPanel = new System.Windows.Forms.GroupBox();
-            this.foldersOnly = new System.Windows.Forms.RadioButton();
-            this.templates = new System.Windows.Forms.RadioButton();
-            this.selectServers = new System.Windows.Forms.RadioButton();
-            this.allServers = new System.Windows.Forms.RadioButton();
-            this.templateListPanel = new System.Windows.Forms.GroupBox();
-            this.templateList = new System.Windows.Forms.ComboBox();
-            this.serverPanel = new System.Windows.Forms.GroupBox();
-            this.FileFactory = new System.Windows.Forms.CheckBox();
-            this.Rapidshare = new System.Windows.Forms.CheckBox();
-            this.Sharerapid = new System.Windows.Forms.CheckBox();
-            this.Quickshare = new System.Windows.Forms.CheckBox();
-            this.Ulozto = new System.Windows.Forms.CheckBox();
-            this.hellshare = new System.Windows.Forms.CheckBox();
-            this.Multishare = new System.Windows.Forms.CheckBox();
-            this.vystupLinky = new System.Windows.Forms.GroupBox();
-            this.outputLinks = new System.Windows.Forms.TextBox();
-            this.multiLoadLinky = new System.Windows.Forms.GroupBox();
             this.sablonaListContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.novaSablonaContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.prázdnáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,256 +57,39 @@
             this.oProgramuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugTestyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.grabber.SuspendLayout();
-            this.MoznostiPanel.SuspendLayout();
-            this.templateListPanel.SuspendLayout();
-            this.serverPanel.SuspendLayout();
-            this.vystupLinky.SuspendLayout();
-            this.multiLoadLinky.SuspendLayout();
+            this.generuj = new System.Windows.Forms.Button();
+            this.multiLoadLinky = new System.Windows.Forms.GroupBox();
+            this.inputLinks = new System.Windows.Forms.TextBox();
+            this.vystupLinky = new System.Windows.Forms.GroupBox();
+            this.outputLinks = new System.Windows.Forms.TextBox();
+            this.MoznostiPanel = new System.Windows.Forms.GroupBox();
+            this.serverPanel = new System.Windows.Forms.GroupBox();
+            this.Multishare = new System.Windows.Forms.CheckBox();
+            this.hellshare = new System.Windows.Forms.CheckBox();
+            this.Ulozto = new System.Windows.Forms.CheckBox();
+            this.Quickshare = new System.Windows.Forms.CheckBox();
+            this.Sharerapid = new System.Windows.Forms.CheckBox();
+            this.Rapidshare = new System.Windows.Forms.CheckBox();
+            this.FileFactory = new System.Windows.Forms.CheckBox();
+            this.templateListPanel = new System.Windows.Forms.GroupBox();
+            this.templateList = new System.Windows.Forms.ComboBox();
+            this.allServers = new System.Windows.Forms.RadioButton();
+            this.selectServers = new System.Windows.Forms.RadioButton();
+            this.templates = new System.Windows.Forms.RadioButton();
+            this.foldersOnly = new System.Windows.Forms.RadioButton();
+            this.grabber = new System.Windows.Forms.GroupBox();
             this.sablonaListContextMenu.SuspendLayout();
             this.templateEditPanel.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.textSablony.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.multiLoadLinky.SuspendLayout();
+            this.vystupLinky.SuspendLayout();
+            this.MoznostiPanel.SuspendLayout();
+            this.serverPanel.SuspendLayout();
+            this.templateListPanel.SuspendLayout();
+            this.grabber.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // generuj
-            // 
-            this.generuj.Location = new System.Drawing.Point(388, 301);
-            this.generuj.Name = "generuj";
-            this.generuj.Size = new System.Drawing.Size(148, 30);
-            this.generuj.TabIndex = 0;
-            this.generuj.Text = "Generuj";
-            this.generuj.UseVisualStyleBackColor = true;
-            this.generuj.Click += new System.EventHandler(this.generuj_Click);
-            // 
-            // inputLinks
-            // 
-            this.inputLinks.Location = new System.Drawing.Point(6, 18);
-            this.inputLinks.Multiline = true;
-            this.inputLinks.Name = "inputLinks";
-            this.inputLinks.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.inputLinks.Size = new System.Drawing.Size(358, 288);
-            this.inputLinks.TabIndex = 1;
-            this.inputLinks.WordWrap = false;
-            // 
-            // grabber
-            // 
-            this.grabber.Controls.Add(this.MoznostiPanel);
-            this.grabber.Controls.Add(this.vystupLinky);
-            this.grabber.Controls.Add(this.multiLoadLinky);
-            this.grabber.Controls.Add(this.generuj);
-            this.grabber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.grabber.Location = new System.Drawing.Point(12, 27);
-            this.grabber.Name = "grabber";
-            this.grabber.Size = new System.Drawing.Size(920, 337);
-            this.grabber.TabIndex = 3;
-            this.grabber.TabStop = false;
-            this.grabber.Text = "Grabber odkazů";
-            // 
-            // MoznostiPanel
-            // 
-            this.MoznostiPanel.Controls.Add(this.foldersOnly);
-            this.MoznostiPanel.Controls.Add(this.templates);
-            this.MoznostiPanel.Controls.Add(this.selectServers);
-            this.MoznostiPanel.Controls.Add(this.allServers);
-            this.MoznostiPanel.Controls.Add(this.templateListPanel);
-            this.MoznostiPanel.Controls.Add(this.serverPanel);
-            this.MoznostiPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.MoznostiPanel.Location = new System.Drawing.Point(388, 19);
-            this.MoznostiPanel.Name = "MoznostiPanel";
-            this.MoznostiPanel.Size = new System.Drawing.Size(148, 271);
-            this.MoznostiPanel.TabIndex = 5;
-            this.MoznostiPanel.TabStop = false;
-            this.MoznostiPanel.Text = "Možnosti";
-            // 
-            // foldersOnly
-            // 
-            this.foldersOnly.AutoSize = true;
-            this.foldersOnly.Location = new System.Drawing.Point(14, 87);
-            this.foldersOnly.Name = "foldersOnly";
-            this.foldersOnly.Size = new System.Drawing.Size(87, 17);
-            this.foldersOnly.TabIndex = 5;
-            this.foldersOnly.TabStop = true;
-            this.foldersOnly.Text = "Pouze složky";
-            this.foldersOnly.UseVisualStyleBackColor = true;
-            // 
-            // templates
-            // 
-            this.templates.AutoSize = true;
-            this.templates.Location = new System.Drawing.Point(14, 64);
-            this.templates.Name = "templates";
-            this.templates.Size = new System.Drawing.Size(63, 17);
-            this.templates.TabIndex = 2;
-            this.templates.Text = "Šablony";
-            this.templates.UseVisualStyleBackColor = true;
-            this.templates.CheckedChanged += new System.EventHandler(this.Sablony_CheckedChanged);
-            // 
-            // selectServers
-            // 
-            this.selectServers.AutoSize = true;
-            this.selectServers.Location = new System.Drawing.Point(14, 41);
-            this.selectServers.Name = "selectServers";
-            this.selectServers.Size = new System.Drawing.Size(110, 17);
-            this.selectServers.TabIndex = 1;
-            this.selectServers.Text = "Jednotlivé servery";
-            this.selectServers.UseVisualStyleBackColor = true;
-            this.selectServers.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
-            // allServers
-            // 
-            this.allServers.AutoSize = true;
-            this.allServers.Checked = true;
-            this.allServers.Location = new System.Drawing.Point(14, 18);
-            this.allServers.Name = "allServers";
-            this.allServers.Size = new System.Drawing.Size(103, 17);
-            this.allServers.TabIndex = 0;
-            this.allServers.TabStop = true;
-            this.allServers.Text = "Všechny servery";
-            this.allServers.UseVisualStyleBackColor = true;
-            // 
-            // templateListPanel
-            // 
-            this.templateListPanel.Controls.Add(this.templateList);
-            this.templateListPanel.Location = new System.Drawing.Point(6, 109);
-            this.templateListPanel.Name = "templateListPanel";
-            this.templateListPanel.Size = new System.Drawing.Size(132, 59);
-            this.templateListPanel.TabIndex = 4;
-            this.templateListPanel.TabStop = false;
-            this.templateListPanel.Text = "Šablony";
-            this.templateListPanel.Visible = false;
-            // 
-            // templateList
-            // 
-            this.templateList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.templateList.Items.AddRange(new object[] {
-            "BBcode graficky",
-            "BBcode textově"});
-            this.templateList.Location = new System.Drawing.Point(6, 19);
-            this.templateList.Name = "templateList";
-            this.templateList.Size = new System.Drawing.Size(120, 21);
-            this.templateList.TabIndex = 0;
-            this.templateList.Tag = "";
-            // 
-            // serverPanel
-            // 
-            this.serverPanel.Controls.Add(this.FileFactory);
-            this.serverPanel.Controls.Add(this.Rapidshare);
-            this.serverPanel.Controls.Add(this.Sharerapid);
-            this.serverPanel.Controls.Add(this.Quickshare);
-            this.serverPanel.Controls.Add(this.Ulozto);
-            this.serverPanel.Controls.Add(this.hellshare);
-            this.serverPanel.Controls.Add(this.Multishare);
-            this.serverPanel.Location = new System.Drawing.Point(6, 109);
-            this.serverPanel.Name = "serverPanel";
-            this.serverPanel.Size = new System.Drawing.Size(132, 156);
-            this.serverPanel.TabIndex = 3;
-            this.serverPanel.TabStop = false;
-            this.serverPanel.Text = "Servery";
-            this.serverPanel.Visible = false;
-            // 
-            // FileFactory
-            // 
-            this.FileFactory.AutoSize = true;
-            this.FileFactory.Location = new System.Drawing.Point(8, 129);
-            this.FileFactory.Name = "FileFactory";
-            this.FileFactory.Size = new System.Drawing.Size(77, 17);
-            this.FileFactory.TabIndex = 6;
-            this.FileFactory.Text = "FileFactory";
-            this.FileFactory.UseVisualStyleBackColor = true;
-            // 
-            // Rapidshare
-            // 
-            this.Rapidshare.AutoSize = true;
-            this.Rapidshare.Location = new System.Drawing.Point(8, 74);
-            this.Rapidshare.Name = "Rapidshare";
-            this.Rapidshare.Size = new System.Drawing.Size(80, 17);
-            this.Rapidshare.TabIndex = 5;
-            this.Rapidshare.Text = "Rapidshare";
-            this.Rapidshare.UseVisualStyleBackColor = true;
-            // 
-            // Sharerapid
-            // 
-            this.Sharerapid.AutoSize = true;
-            this.Sharerapid.Location = new System.Drawing.Point(8, 93);
-            this.Sharerapid.Name = "Sharerapid";
-            this.Sharerapid.Size = new System.Drawing.Size(85, 17);
-            this.Sharerapid.TabIndex = 4;
-            this.Sharerapid.Text = "Share-Rapid";
-            this.Sharerapid.UseVisualStyleBackColor = true;
-            // 
-            // Quickshare
-            // 
-            this.Quickshare.AutoSize = true;
-            this.Quickshare.Location = new System.Drawing.Point(8, 55);
-            this.Quickshare.Name = "Quickshare";
-            this.Quickshare.Size = new System.Drawing.Size(82, 17);
-            this.Quickshare.TabIndex = 3;
-            this.Quickshare.Text = "QuickShare";
-            this.Quickshare.UseVisualStyleBackColor = true;
-            // 
-            // Ulozto
-            // 
-            this.Ulozto.AutoSize = true;
-            this.Ulozto.Location = new System.Drawing.Point(8, 111);
-            this.Ulozto.Name = "Ulozto";
-            this.Ulozto.Size = new System.Drawing.Size(59, 17);
-            this.Ulozto.TabIndex = 2;
-            this.Ulozto.Text = "Uloz.to";
-            this.Ulozto.UseVisualStyleBackColor = true;
-            // 
-            // hellshare
-            // 
-            this.hellshare.AutoSize = true;
-            this.hellshare.Location = new System.Drawing.Point(8, 36);
-            this.hellshare.Name = "hellshare";
-            this.hellshare.Size = new System.Drawing.Size(70, 17);
-            this.hellshare.TabIndex = 1;
-            this.hellshare.Text = "Hellshare";
-            this.hellshare.UseVisualStyleBackColor = true;
-            // 
-            // Multishare
-            // 
-            this.Multishare.AutoSize = true;
-            this.Multishare.Location = new System.Drawing.Point(8, 17);
-            this.Multishare.Name = "Multishare";
-            this.Multishare.Size = new System.Drawing.Size(74, 17);
-            this.Multishare.TabIndex = 0;
-            this.Multishare.Text = "Multishare";
-            this.Multishare.UseVisualStyleBackColor = true;
-            // 
-            // vystupLinky
-            // 
-            this.vystupLinky.Controls.Add(this.outputLinks);
-            this.vystupLinky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.vystupLinky.Location = new System.Drawing.Point(542, 19);
-            this.vystupLinky.Name = "vystupLinky";
-            this.vystupLinky.Size = new System.Drawing.Size(370, 312);
-            this.vystupLinky.TabIndex = 4;
-            this.vystupLinky.TabStop = false;
-            this.vystupLinky.Text = "Zpracované linky";
-            // 
-            // outputLinks
-            // 
-            this.outputLinks.Location = new System.Drawing.Point(6, 18);
-            this.outputLinks.Multiline = true;
-            this.outputLinks.Name = "outputLinks";
-            this.outputLinks.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputLinks.Size = new System.Drawing.Size(358, 289);
-            this.outputLinks.TabIndex = 1;
-            this.outputLinks.WordWrap = false;
-            this.outputLinks.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OutputLinky_MouseClick);
-            // 
-            // multiLoadLinky
-            // 
-            this.multiLoadLinky.Controls.Add(this.inputLinks);
-            this.multiLoadLinky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.multiLoadLinky.Location = new System.Drawing.Point(12, 19);
-            this.multiLoadLinky.Name = "multiLoadLinky";
-            this.multiLoadLinky.Size = new System.Drawing.Size(370, 312);
-            this.multiLoadLinky.TabIndex = 3;
-            this.multiLoadLinky.TabStop = false;
-            this.multiLoadLinky.Text = "Linky na Multiload";
             // 
             // sablonaListContextMenu
             // 
@@ -563,14 +325,252 @@
             this.openFileDialog1.FileName = "*.dat";
             this.openFileDialog1.Filter = "Soubory šablon|*.dat";
             // 
+            // generuj
+            // 
+            this.generuj.Location = new System.Drawing.Point(388, 301);
+            this.generuj.Name = "generuj";
+            this.generuj.Size = new System.Drawing.Size(148, 30);
+            this.generuj.TabIndex = 0;
+            this.generuj.Text = "Generuj";
+            this.generuj.UseVisualStyleBackColor = true;
+            this.generuj.Click += new System.EventHandler(this.generuj_Click);
+            // 
+            // multiLoadLinky
+            // 
+            this.multiLoadLinky.Controls.Add(this.inputLinks);
+            this.multiLoadLinky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.multiLoadLinky.Location = new System.Drawing.Point(12, 19);
+            this.multiLoadLinky.Name = "multiLoadLinky";
+            this.multiLoadLinky.Size = new System.Drawing.Size(370, 312);
+            this.multiLoadLinky.TabIndex = 3;
+            this.multiLoadLinky.TabStop = false;
+            this.multiLoadLinky.Text = "Linky na Multiload";
+            // 
+            // inputLinks
+            // 
+            this.inputLinks.Location = new System.Drawing.Point(6, 18);
+            this.inputLinks.Multiline = true;
+            this.inputLinks.Name = "inputLinks";
+            this.inputLinks.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.inputLinks.Size = new System.Drawing.Size(358, 288);
+            this.inputLinks.TabIndex = 1;
+            this.inputLinks.WordWrap = false;
+            // 
+            // vystupLinky
+            // 
+            this.vystupLinky.Controls.Add(this.outputLinks);
+            this.vystupLinky.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.vystupLinky.Location = new System.Drawing.Point(542, 19);
+            this.vystupLinky.Name = "vystupLinky";
+            this.vystupLinky.Size = new System.Drawing.Size(370, 312);
+            this.vystupLinky.TabIndex = 4;
+            this.vystupLinky.TabStop = false;
+            this.vystupLinky.Text = "Zpracované linky";
+            // 
+            // outputLinks
+            // 
+            this.outputLinks.Location = new System.Drawing.Point(6, 18);
+            this.outputLinks.Multiline = true;
+            this.outputLinks.Name = "outputLinks";
+            this.outputLinks.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.outputLinks.Size = new System.Drawing.Size(358, 289);
+            this.outputLinks.TabIndex = 1;
+            this.outputLinks.WordWrap = false;
+            this.outputLinks.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OutputLinky_MouseClick);
+            // 
+            // MoznostiPanel
+            // 
+            this.MoznostiPanel.Controls.Add(this.foldersOnly);
+            this.MoznostiPanel.Controls.Add(this.templates);
+            this.MoznostiPanel.Controls.Add(this.selectServers);
+            this.MoznostiPanel.Controls.Add(this.allServers);
+            this.MoznostiPanel.Controls.Add(this.templateListPanel);
+            this.MoznostiPanel.Controls.Add(this.serverPanel);
+            this.MoznostiPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.MoznostiPanel.Location = new System.Drawing.Point(388, 19);
+            this.MoznostiPanel.Name = "MoznostiPanel";
+            this.MoznostiPanel.Size = new System.Drawing.Size(148, 271);
+            this.MoznostiPanel.TabIndex = 5;
+            this.MoznostiPanel.TabStop = false;
+            this.MoznostiPanel.Text = "Možnosti";
+            // 
+            // serverPanel
+            // 
+            this.serverPanel.Controls.Add(this.FileFactory);
+            this.serverPanel.Controls.Add(this.Rapidshare);
+            this.serverPanel.Controls.Add(this.Sharerapid);
+            this.serverPanel.Controls.Add(this.Quickshare);
+            this.serverPanel.Controls.Add(this.Ulozto);
+            this.serverPanel.Controls.Add(this.hellshare);
+            this.serverPanel.Controls.Add(this.Multishare);
+            this.serverPanel.Location = new System.Drawing.Point(6, 109);
+            this.serverPanel.Name = "serverPanel";
+            this.serverPanel.Size = new System.Drawing.Size(132, 156);
+            this.serverPanel.TabIndex = 3;
+            this.serverPanel.TabStop = false;
+            this.serverPanel.Text = "Servery";
+            this.serverPanel.Visible = false;
+            // 
+            // Multishare
+            // 
+            this.Multishare.AutoSize = true;
+            this.Multishare.Location = new System.Drawing.Point(8, 17);
+            this.Multishare.Name = "Multishare";
+            this.Multishare.Size = new System.Drawing.Size(74, 17);
+            this.Multishare.TabIndex = 0;
+            this.Multishare.Text = "Multishare";
+            this.Multishare.UseVisualStyleBackColor = true;
+            // 
+            // hellshare
+            // 
+            this.hellshare.AutoSize = true;
+            this.hellshare.Location = new System.Drawing.Point(8, 36);
+            this.hellshare.Name = "hellshare";
+            this.hellshare.Size = new System.Drawing.Size(70, 17);
+            this.hellshare.TabIndex = 1;
+            this.hellshare.Text = "Hellshare";
+            this.hellshare.UseVisualStyleBackColor = true;
+            // 
+            // Ulozto
+            // 
+            this.Ulozto.AutoSize = true;
+            this.Ulozto.Location = new System.Drawing.Point(8, 111);
+            this.Ulozto.Name = "Ulozto";
+            this.Ulozto.Size = new System.Drawing.Size(59, 17);
+            this.Ulozto.TabIndex = 2;
+            this.Ulozto.Text = "Uloz.to";
+            this.Ulozto.UseVisualStyleBackColor = true;
+            // 
+            // Quickshare
+            // 
+            this.Quickshare.AutoSize = true;
+            this.Quickshare.Location = new System.Drawing.Point(8, 55);
+            this.Quickshare.Name = "Quickshare";
+            this.Quickshare.Size = new System.Drawing.Size(82, 17);
+            this.Quickshare.TabIndex = 3;
+            this.Quickshare.Text = "QuickShare";
+            this.Quickshare.UseVisualStyleBackColor = true;
+            // 
+            // Sharerapid
+            // 
+            this.Sharerapid.AutoSize = true;
+            this.Sharerapid.Location = new System.Drawing.Point(8, 93);
+            this.Sharerapid.Name = "Sharerapid";
+            this.Sharerapid.Size = new System.Drawing.Size(85, 17);
+            this.Sharerapid.TabIndex = 4;
+            this.Sharerapid.Text = "Share-Rapid";
+            this.Sharerapid.UseVisualStyleBackColor = true;
+            // 
+            // Rapidshare
+            // 
+            this.Rapidshare.AutoSize = true;
+            this.Rapidshare.Location = new System.Drawing.Point(8, 74);
+            this.Rapidshare.Name = "Rapidshare";
+            this.Rapidshare.Size = new System.Drawing.Size(80, 17);
+            this.Rapidshare.TabIndex = 5;
+            this.Rapidshare.Text = "Rapidshare";
+            this.Rapidshare.UseVisualStyleBackColor = true;
+            // 
+            // FileFactory
+            // 
+            this.FileFactory.AutoSize = true;
+            this.FileFactory.Location = new System.Drawing.Point(8, 129);
+            this.FileFactory.Name = "FileFactory";
+            this.FileFactory.Size = new System.Drawing.Size(77, 17);
+            this.FileFactory.TabIndex = 6;
+            this.FileFactory.Text = "FileFactory";
+            this.FileFactory.UseVisualStyleBackColor = true;
+            // 
+            // templateListPanel
+            // 
+            this.templateListPanel.Controls.Add(this.templateList);
+            this.templateListPanel.Location = new System.Drawing.Point(6, 109);
+            this.templateListPanel.Name = "templateListPanel";
+            this.templateListPanel.Size = new System.Drawing.Size(132, 59);
+            this.templateListPanel.TabIndex = 4;
+            this.templateListPanel.TabStop = false;
+            this.templateListPanel.Text = "Šablony";
+            this.templateListPanel.Visible = false;
+            // 
+            // templateList
+            // 
+            this.templateList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.templateList.Items.AddRange(new object[] {
+            "BBcode graficky",
+            "BBcode textově"});
+            this.templateList.Location = new System.Drawing.Point(6, 19);
+            this.templateList.Name = "templateList";
+            this.templateList.Size = new System.Drawing.Size(120, 21);
+            this.templateList.TabIndex = 0;
+            this.templateList.Tag = "";
+            // 
+            // allServers
+            // 
+            this.allServers.AutoSize = true;
+            this.allServers.Checked = true;
+            this.allServers.Location = new System.Drawing.Point(14, 18);
+            this.allServers.Name = "allServers";
+            this.allServers.Size = new System.Drawing.Size(103, 17);
+            this.allServers.TabIndex = 0;
+            this.allServers.TabStop = true;
+            this.allServers.Text = "Všechny servery";
+            this.allServers.UseVisualStyleBackColor = true;
+            // 
+            // selectServers
+            // 
+            this.selectServers.AutoSize = true;
+            this.selectServers.Location = new System.Drawing.Point(14, 41);
+            this.selectServers.Name = "selectServers";
+            this.selectServers.Size = new System.Drawing.Size(110, 17);
+            this.selectServers.TabIndex = 1;
+            this.selectServers.Text = "Jednotlivé servery";
+            this.selectServers.UseVisualStyleBackColor = true;
+            this.selectServers.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // templates
+            // 
+            this.templates.AutoSize = true;
+            this.templates.Location = new System.Drawing.Point(14, 64);
+            this.templates.Name = "templates";
+            this.templates.Size = new System.Drawing.Size(63, 17);
+            this.templates.TabIndex = 2;
+            this.templates.Text = "Šablony";
+            this.templates.UseVisualStyleBackColor = true;
+            this.templates.CheckedChanged += new System.EventHandler(this.Sablony_CheckedChanged);
+            // 
+            // foldersOnly
+            // 
+            this.foldersOnly.AutoSize = true;
+            this.foldersOnly.Location = new System.Drawing.Point(14, 87);
+            this.foldersOnly.Name = "foldersOnly";
+            this.foldersOnly.Size = new System.Drawing.Size(87, 17);
+            this.foldersOnly.TabIndex = 5;
+            this.foldersOnly.TabStop = true;
+            this.foldersOnly.Text = "Pouze složky";
+            this.foldersOnly.UseVisualStyleBackColor = true;
+            // 
+            // grabber
+            // 
+            this.grabber.Controls.Add(this.MoznostiPanel);
+            this.grabber.Controls.Add(this.vystupLinky);
+            this.grabber.Controls.Add(this.multiLoadLinky);
+            this.grabber.Controls.Add(this.generuj);
+            this.grabber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.grabber.Location = new System.Drawing.Point(12, 27);
+            this.grabber.Name = "grabber";
+            this.grabber.Size = new System.Drawing.Size(920, 337);
+            this.grabber.TabIndex = 3;
+            this.grabber.TabStop = false;
+            this.grabber.Text = "Grabber odkazů";
+            // 
             // hlavniOkno1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 376);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.templateEditPanel);
             this.Controls.Add(this.grabber);
+            this.Controls.Add(this.templateEditPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(952, 410);
@@ -580,16 +580,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.ClientSizeChanged += new System.EventHandler(this.Form1_ResizeEnd);
-            this.grabber.ResumeLayout(false);
-            this.MoznostiPanel.ResumeLayout(false);
-            this.MoznostiPanel.PerformLayout();
-            this.templateListPanel.ResumeLayout(false);
-            this.serverPanel.ResumeLayout(false);
-            this.serverPanel.PerformLayout();
-            this.vystupLinky.ResumeLayout(false);
-            this.vystupLinky.PerformLayout();
-            this.multiLoadLinky.ResumeLayout(false);
-            this.multiLoadLinky.PerformLayout();
             this.sablonaListContextMenu.ResumeLayout(false);
             this.templateEditPanel.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -597,6 +587,16 @@
             this.textSablony.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.multiLoadLinky.ResumeLayout(false);
+            this.multiLoadLinky.PerformLayout();
+            this.vystupLinky.ResumeLayout(false);
+            this.vystupLinky.PerformLayout();
+            this.MoznostiPanel.ResumeLayout(false);
+            this.MoznostiPanel.PerformLayout();
+            this.serverPanel.ResumeLayout(false);
+            this.serverPanel.PerformLayout();
+            this.templateListPanel.ResumeLayout(false);
+            this.grabber.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -604,25 +604,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button generuj;
-        private System.Windows.Forms.TextBox inputLinks;
-        private System.Windows.Forms.GroupBox grabber;
-        private System.Windows.Forms.GroupBox vystupLinky;
-        private System.Windows.Forms.TextBox outputLinks;
-        private System.Windows.Forms.GroupBox multiLoadLinky;
-        private System.Windows.Forms.GroupBox MoznostiPanel;
-        private System.Windows.Forms.RadioButton templates;
-        private System.Windows.Forms.RadioButton selectServers;
-        private System.Windows.Forms.RadioButton allServers;
-        private System.Windows.Forms.GroupBox serverPanel;
-        private System.Windows.Forms.CheckBox Rapidshare;
-        private System.Windows.Forms.CheckBox Sharerapid;
-        private System.Windows.Forms.CheckBox Quickshare;
-        private System.Windows.Forms.CheckBox Ulozto;
-        private System.Windows.Forms.CheckBox hellshare;
-        private System.Windows.Forms.CheckBox Multishare;
-        private System.Windows.Forms.GroupBox templateListPanel;
-        private System.Windows.Forms.ComboBox templateList;
         private System.Windows.Forms.GroupBox templateEditPanel;
         private System.Windows.Forms.GroupBox textSablony;
         private System.Windows.Forms.TextBox templateEditBox;
@@ -638,11 +619,9 @@
         private System.Windows.Forms.ToolStripMenuItem kopieZVybranéToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem odstranitŠablonuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zTextuToolStripMenuItem;
-        private System.Windows.Forms.CheckBox FileFactory;
         private System.Windows.Forms.ToolStripMenuItem nápovědaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zkontrolovatAktualizaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oProgramuToolStripMenuItem;
-        private System.Windows.Forms.RadioButton foldersOnly;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem přejmenovatŠablonuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugTestyToolStripMenuItem;
@@ -652,6 +631,27 @@
         private System.Windows.Forms.ToolStripMenuItem přidatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator menuOddelovac1;
+        private System.Windows.Forms.Button generuj;
+        private System.Windows.Forms.GroupBox multiLoadLinky;
+        private System.Windows.Forms.TextBox inputLinks;
+        private System.Windows.Forms.GroupBox vystupLinky;
+        private System.Windows.Forms.TextBox outputLinks;
+        private System.Windows.Forms.GroupBox MoznostiPanel;
+        private System.Windows.Forms.RadioButton foldersOnly;
+        private System.Windows.Forms.RadioButton templates;
+        private System.Windows.Forms.RadioButton selectServers;
+        private System.Windows.Forms.RadioButton allServers;
+        private System.Windows.Forms.GroupBox templateListPanel;
+        private System.Windows.Forms.ComboBox templateList;
+        private System.Windows.Forms.GroupBox serverPanel;
+        private System.Windows.Forms.CheckBox FileFactory;
+        private System.Windows.Forms.CheckBox Rapidshare;
+        private System.Windows.Forms.CheckBox Sharerapid;
+        private System.Windows.Forms.CheckBox Quickshare;
+        private System.Windows.Forms.CheckBox Ulozto;
+        private System.Windows.Forms.CheckBox hellshare;
+        private System.Windows.Forms.CheckBox Multishare;
+        private System.Windows.Forms.GroupBox grabber;
     }
 }
 

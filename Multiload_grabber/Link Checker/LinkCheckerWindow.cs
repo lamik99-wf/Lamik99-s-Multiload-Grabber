@@ -82,7 +82,7 @@ namespace MultiloadGrabber
             linkCheckerResults.RowCount = 0;
             linkCheckerResults.ColumnCount = 0;
 
-            Parser p = new Parser(inputLinks.Lines);
+            Parser p = new Parser(inputLinks.Lines, null);
 
             string[] servers = { "Multishare", "Hellshare", "Quickshare", "Rapidshare", "Share-Rapid", "Uloz.to", "FileFactory" };
 

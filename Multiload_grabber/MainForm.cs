@@ -15,6 +15,8 @@ namespace MultiloadGrabber
     {
         public TemplateTable tmpTable;
 
+        enum Servers { CZshare, Hellshare, ShareRapid, Rapidshare, Ulozto, Quickshare, Multishare, XXXXX, FileFactory };
+
         public bool templateChanged = false;
         public int lastSelected = -1;
         public hlavniOkno1()
@@ -36,9 +38,9 @@ namespace MultiloadGrabber
         /// </summary>
         private void generuj_Click(object sender, EventArgs e)
         {
+            outputLinks.Clear();
             if (foldersOnly.Checked)
             {
-                outputLinks.Clear();
                 foreach (string s in inputLinks.Lines)
                 {
                     if (s.IndexOf("/slozka/") >= 0)
@@ -48,17 +50,43 @@ namespace MultiloadGrabber
                 return;
             }
 
-            Parser p = new Parser(inputLinks.Lines);
-       
-            outputLinks.Clear();
-            if (templates.Checked)
+            Parser p = null;
+            if (allServers.Checked)
+                p = new Parser(inputLinks.Lines, null);
+            else 
             {
-                Template sabl;
-                sabl = TemplateGetterSetter.GetTemplate(templateList.Text,tmpTable);
-                if (sabl!=null)
-                    SablonaParser.Parse(sabl, p, outputLinks);
+                if (templates.Checked)
+                {
+                    Template sabl;
+                    sabl = TemplateGetterSetter.GetTemplate(templateList.Text, tmpTable);
+                    if (sabl != null)
+                    {
+                        p = new Parser(inputLinks.Lines, sabl.GetServersIncluded());
+                        SablonaParser.Parse(sabl, p, outputLinks);
+                        return;
+                    }
+                }
+                else
+                {
+                    bool[] servers = new bool[9];
+                    if (Multishare.Checked)
+                        servers[(int)Servers.Multishare]=true;
+                    if (hellshare.Checked)
+                        servers[(int)Servers.Hellshare]=true;
+                    if (Quickshare.Checked)
+                        servers[(int)Servers.Quickshare]=true;
+                    if (Rapidshare.Checked)
+                        servers[(int)Servers.Rapidshare]=true;
+                    if (Sharerapid.Checked)
+                        servers[(int)Servers.ShareRapid]=true;
+                    if (Ulozto.Checked)
+                        servers[(int)Servers.Ulozto]=true;
+                    if (FileFactory.Checked)
+                        servers[(int)Servers.FileFactory]=true;
+                    p = new Parser(inputLinks.Lines, servers);
+                }                 
             }
-            else
+            if (p != null)
             {
                 if (allServers.Checked || Multishare.Checked)
                     foreach (string s in p.GetMultiShare())

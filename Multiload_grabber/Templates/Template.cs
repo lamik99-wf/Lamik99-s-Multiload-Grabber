@@ -4,15 +4,24 @@
 ///</summary>
 ///
 
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Net;
+using System.IO;
+using System.Threading;
 
 namespace MultiloadGrabber
 {
     [Serializable]
     public class Template
     {
+        enum Servers {CZshare, Hellshare, ShareRapid, Rapidshare, Ulozto, Quickshare, Multishare, XXXXX, FileFactory};
+
         string nazev;
         List<string> sablona;
 
@@ -43,6 +52,29 @@ namespace MultiloadGrabber
             {
                 nazev = value;
             }
+        }
+
+        public bool[] GetServersIncluded()
+        {
+            bool[] ret = new bool[9];
+            foreach (string s in SablonaText)
+            {
+                if (s.IndexOf("÷MULTISHARE÷") != -1)
+                    ret[(int)Servers.Multishare] = true;
+                if (s.IndexOf("÷HELLSHARE÷") != -1)
+                    ret[(int)Servers.Hellshare] = true;
+                if (s.IndexOf("÷RAPIDSHARE÷") != -1)
+                    ret[(int)Servers.Rapidshare] = true;
+                if (s.IndexOf("÷SHARERAPID÷") != -1)
+                    ret[(int)Servers.ShareRapid] = true;
+                if (s.IndexOf("÷QUICKSHARE÷") != -1)
+                    ret[(int)Servers.Quickshare] = true;
+                if (s.IndexOf("÷FILEFACTORY÷") != -1)
+                    ret[(int)Servers.FileFactory] = true;
+                if (s.IndexOf("÷ULOZTO÷") != -1)
+                    ret[(int)Servers.Ulozto] = true;
+            }
+            return ret;
         }
     }
 

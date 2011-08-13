@@ -10,6 +10,8 @@ namespace MultiloadGrabber
 {
     public class Parser
     {
+        enum Servers { CZshare, Hellshare, ShareRapid, Rapidshare, Ulozto, Quickshare, Multishare, XXXXX, FileFactory };
+
         public List<string> sharerapid;
         public List<string> multishare;
         public List<string> rapidshare;
@@ -18,7 +20,7 @@ namespace MultiloadGrabber
         public List<string> ulozto;
         public List<string> filefactory;
         const string textAreaZahlavi = "<textarea onclick=\"this.select()\" cols=\"50\" rows=\"10\">";
-        const string serverURL = @"http://mlgrabber.php5.cz/index.php?";
+        const string serverURL = @"http://mlgrabber.php5.cz/ServerSide.php?";
 
         public Parser()
         {
@@ -31,8 +33,15 @@ namespace MultiloadGrabber
             filefactory = new List<string>();
         }
 
-        public Parser(string[] links)
+        public Parser(string[] links, bool[] serverArray)
         {
+            int hash = 0;
+            if (serverArray == null)
+                hash = 0;
+            else
+                for (int i = 0; i < 9; i++)
+                    if (serverArray[i])
+                        hash += (int)Math.Pow(2, i);
             sharerapid = new List<string>();
             multishare = new List<string>();
             rapidshare = new List<string>();
@@ -60,6 +69,7 @@ namespace MultiloadGrabber
                 tx += "a[]=" + IDs[i].ToString() + "&";
             if (IDs.Count != 0)
                 tx += "a[]=" + IDs[IDs.Count - 1].ToString();
+            tx += "&serv=" + hash;
             ret = NetworkHandler.getPageSource(tx);
             string[] splitted = ret.Split('\n');
             for (int i = 0; i < splitted.Length; i++)
@@ -68,30 +78,59 @@ namespace MultiloadGrabber
                 if (splitted[i].Length < 4 || splitted[i][0] != 'h' || splitted[i][1] != 't' || splitted[i][2] != 't' || splitted[i][3] != 'p')
                     splitted[i] = "-";
             }
+            int counter = 0;
             for (int i = 0; i < (IDs.Count * 7); i++)
             {
                 switch (i / IDs.Count)
                 {
                     case 0:
-                        hellshare.Add(splitted[i]);
+                        if ((hash == 0) || serverArray[(int)Servers.Hellshare])
+                        {
+                            hellshare.Add(splitted[counter]);
+                            ++counter;
+                        }
                         break;
                     case 1:
-                        sharerapid.Add(splitted[i]);
+                        if ((hash == 0) || serverArray[(int)Servers.ShareRapid])
+                        {
+                            sharerapid.Add(splitted[counter]);
+                            ++counter;
+                        }
                         break;
                     case 2:
-                        rapidshare.Add(splitted[i]);
+                        if ((hash == 0) || serverArray[(int)Servers.Rapidshare])
+                        {
+                            rapidshare.Add(splitted[counter]);
+                            ++counter;
+                        }
                         break;
                     case 3:
-                        ulozto.Add(splitted[i]);
+                        if ((hash == 0) || serverArray[(int)Servers.Ulozto])
+                        {
+                            ulozto.Add(splitted[counter]);
+                            ++counter;
+                        }
                         break;
                     case 4:
-                        quickshare.Add(splitted[i]);
+                        if ((hash == 0) || serverArray[(int)Servers.Quickshare])
+                        {
+                            quickshare.Add(splitted[counter]);
+                            ++counter;
+                        }
                         break;
                     case 5:
-                        multishare.Add(splitted[i]);
+                        if ((hash == 0) || serverArray[(int)Servers.Multishare])
+                        {
+                            multishare.Add(splitted[counter]);
+                            ++counter;
+                        }
                         break;
                     case 6:
-                        filefactory.Add(splitted[i]);
+                        if ((hash == 0) || serverArray[(int)Servers.FileFactory])
+                        {
+                            filefactory.Add(splitted[counter]);
+                            ++counter;
+                        }
                         break;
                 }
             }     

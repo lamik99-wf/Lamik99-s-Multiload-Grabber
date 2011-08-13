@@ -83,6 +83,11 @@ namespace MultiloadGrabber
             linkCheckerResults.ColumnCount = 0;
 
             Parser p = new Parser(inputLinks.Lines, null);
+            if (p.Failed)
+            {
+                DebugLog.Zapis("Parser couldn't connect to the Internet. Link checking failed.");
+                return;
+            }
 
             string[] servers = { "Multishare", "Hellshare", "Quickshare", "Rapidshare", "Share-Rapid", "Uloz.to", "FileFactory" };
 

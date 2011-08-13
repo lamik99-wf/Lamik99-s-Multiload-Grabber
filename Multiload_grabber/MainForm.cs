@@ -62,7 +62,9 @@ namespace MultiloadGrabber
                     if (sabl != null)
                     {
                         p = new Parser(inputLinks.Lines, sabl.GetServersIncluded());
-                        SablonaParser.Parse(sabl, p, outputLinks);
+                        if (!p.Failed)
+                            SablonaParser.Parse(sabl, p, outputLinks);
+                        else DebugLog.Zapis("Link grabbing failed - couldn't connect to the Internet.");
                         return;
                     }
                 }
@@ -86,7 +88,7 @@ namespace MultiloadGrabber
                     p = new Parser(inputLinks.Lines, servers);
                 }                 
             }
-            if (p != null)
+            if (p != null && !p.Failed)
             {
                 if (allServers.Checked || Multishare.Checked)
                     foreach (string s in p.GetMultiShare())
@@ -124,6 +126,8 @@ namespace MultiloadGrabber
                         outputLinks.AppendText(s + System.Environment.NewLine);
                     }
             }
+            else
+                DebugLog.Zapis("Link grabbing failed - couldn't connect to the Internet");
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -534,6 +538,11 @@ namespace MultiloadGrabber
         {
             const string changelogURL = "http://mlgrabber.php5.cz/changelog.txt";
             string s = NetworkHandler.getPageSource(changelogURL);
+            if (s == "")
+            {
+                DebugLog.Zapis("Version check failed - couldn't connect to the Internet.");
+                return;
+            }
             string[] spl = s.Split('\n');
             if (spl.Length > 0 && spl[0].Trim() != System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
             {

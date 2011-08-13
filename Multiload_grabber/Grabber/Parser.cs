@@ -21,6 +21,7 @@ namespace MultiloadGrabber
         public List<string> filefactory;
         const string textAreaZahlavi = "<textarea onclick=\"this.select()\" cols=\"50\" rows=\"10\">";
         const string serverURL = @"http://mlgrabber.php5.cz/index.php?";
+        bool failed;
 
         public Parser()
         {
@@ -48,7 +49,8 @@ namespace MultiloadGrabber
             quickshare = new List<string>();
             hellshare = new List<string>();
             ulozto = new List<string>();
-            filefactory = new List<string>();            
+            filefactory = new List<string>();
+            failed = false;
             List<UInt32> IDs = new List<uint>();
             foreach (string s in links)
             {
@@ -71,6 +73,12 @@ namespace MultiloadGrabber
                 tx += "a[]=" + IDs[IDs.Count - 1].ToString();
             tx += "&serv=" + hash;
             ret = NetworkHandler.getPageSource(tx);
+            if (ret == "")
+            {
+                DebugLog.Zapis("Couldn't connect to the server. Check your internet connection.");
+                failed = true;
+                return;
+            }
             string[] splitted = ret.Split('\n');
             for (int i = 0; i < splitted.Length; i++)
             {
@@ -134,6 +142,14 @@ namespace MultiloadGrabber
                         break;
                 }
             }     
+        }
+
+        public bool Failed
+        {
+            get
+            {
+                return failed;
+            }
         }
 
         public static string Test()

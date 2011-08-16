@@ -6,22 +6,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Net;
-using System.IO;
-using System.Threading;
+using LocalConst;
 
 namespace MultiloadGrabber
 {
     [Serializable]
     public class Template
     {
-        enum Servers {CZshare, Hellshare, ShareRapid, Rapidshare, Ulozto, Quickshare, Multishare, XXXXX, FileFactory};
-
         string nazev;
         List<string> sablona;
 
@@ -60,19 +51,19 @@ namespace MultiloadGrabber
             foreach (string s in SablonaText)
             {
                 if (s.IndexOf("÷MULTISHARE÷") != -1)
-                    ret[(int)Servers.Multishare] = true;
+                    ret[(int)Server.Multishare] = true;
                 if (s.IndexOf("÷HELLSHARE÷") != -1)
-                    ret[(int)Servers.Hellshare] = true;
+                    ret[(int)Server.Hellshare] = true;
                 if (s.IndexOf("÷RAPIDSHARE÷") != -1)
-                    ret[(int)Servers.Rapidshare] = true;
+                    ret[(int)Server.Rapidshare] = true;
                 if (s.IndexOf("÷SHARERAPID÷") != -1)
-                    ret[(int)Servers.ShareRapid] = true;
+                    ret[(int)Server.ShareRapid] = true;
                 if (s.IndexOf("÷QUICKSHARE÷") != -1)
-                    ret[(int)Servers.Quickshare] = true;
+                    ret[(int)Server.Quickshare] = true;
                 if (s.IndexOf("÷FILEFACTORY÷") != -1)
-                    ret[(int)Servers.FileFactory] = true;
+                    ret[(int)Server.FileFactory] = true;
                 if (s.IndexOf("÷ULOZTO÷") != -1)
-                    ret[(int)Servers.Ulozto] = true;
+                    ret[(int)Server.Ulozto] = true;
             }
             return ret;
         }

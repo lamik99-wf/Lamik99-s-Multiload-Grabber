@@ -5,22 +5,21 @@
 
 using System.Collections.Generic;
 using System;
+using System.Windows.Forms;
+using LocalConst;
 
 namespace MultiloadGrabber
 {
     public class Parser
     {
-        enum Servers { CZshare, Hellshare, ShareRapid, Rapidshare, Ulozto, Quickshare, Multishare, XXXXX, FileFactory };
-
-        public List<string> sharerapid;
-        public List<string> multishare;
-        public List<string> rapidshare;
-        public List<string> quickshare;
-        public List<string> hellshare;
-        public List<string> ulozto;
-        public List<string> filefactory;
-        const string textAreaZahlavi = "<textarea onclick=\"this.select()\" cols=\"50\" rows=\"10\">";
-        const string serverURL = @"http://mlgrabber.php5.cz/index.php?";
+        List<string> sharerapid;
+        List<string> multishare;
+        List<string> rapidshare;
+        List<string> quickshare;
+        List<string> hellshare;
+        List<string> ulozto;
+        List<string> filefactory;
+        List<string> grabbedLinks;
         bool failed;
 
         public Parser()
@@ -38,7 +37,7 @@ namespace MultiloadGrabber
         {
             int hash = 0;
             if (serverArray == null)
-                hash = 0;
+                hash = 0;                
             else
                 for (int i = 0; i < 9; i++)
                     if (serverArray[i])
@@ -50,6 +49,7 @@ namespace MultiloadGrabber
             hellshare = new List<string>();
             ulozto = new List<string>();
             filefactory = new List<string>();
+            grabbedLinks = new List<string>();
             failed = false;
             List<UInt32> IDs = new List<uint>();
             foreach (string s in links)
@@ -63,10 +63,14 @@ namespace MultiloadGrabber
                 else
                 {
                     if (s != "")
+                    {
+
                         IDs.Add(parse(s));
+                        grabbedLinks.Add(s);
+                    }
                 }
             }
-            string tx = serverURL, ret = "";
+            string tx = Const.serverURL, ret = "";
             for (int i = 0; i < (IDs.Count - 1); i++)
                 tx += "a[]=" + IDs[i].ToString() + "&";
             if (IDs.Count != 0)
@@ -92,49 +96,49 @@ namespace MultiloadGrabber
                 switch (i / IDs.Count)
                 {
                     case 0:
-                        if ((hash == 0) || serverArray[(int)Servers.Hellshare])
+                        if ((hash == 0) || serverArray[(int)Server.Hellshare])
                         {
                             hellshare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
                     case 1:
-                        if ((hash == 0) || serverArray[(int)Servers.ShareRapid])
+                        if ((hash == 0) || serverArray[(int)Server.ShareRapid])
                         {
                             sharerapid.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
                     case 2:
-                        if ((hash == 0) || serverArray[(int)Servers.Rapidshare])
+                        if ((hash == 0) || serverArray[(int)Server.Rapidshare])
                         {
                             rapidshare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
                     case 3:
-                        if ((hash == 0) || serverArray[(int)Servers.Ulozto])
+                        if ((hash == 0) || serverArray[(int)Server.Ulozto])
                         {
                             ulozto.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
                     case 4:
-                        if ((hash == 0) || serverArray[(int)Servers.Quickshare])
+                        if ((hash == 0) || serverArray[(int)Server.Quickshare])
                         {
                             quickshare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
                     case 5:
-                        if ((hash == 0) || serverArray[(int)Servers.Multishare])
+                        if ((hash == 0) || serverArray[(int)Server.Multishare])
                         {
                             multishare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
                     case 6:
-                        if ((hash == 0) || serverArray[(int)Servers.FileFactory])
+                        if ((hash == 0) || serverArray[(int)Server.FileFactory])
                         {
                             filefactory.Add(splitted[counter]);
                             ++counter;
@@ -233,8 +237,16 @@ namespace MultiloadGrabber
         {
             string text = NetworkHandler.getPageSource(s);
             int zacatek = text.IndexOf("<textarea"), konec = text.LastIndexOf("</textarea");
-            text = text.Substring(zacatek + textAreaZahlavi.Length, konec - zacatek - textAreaZahlavi.Length);
+            text = text.Substring(zacatek + Const.textAreaZahlavi.Length, konec - zacatek - Const.textAreaZahlavi.Length);
             return text.Split('\n', '\r');
+        }
+
+        public string[] GrabbedLinks
+        {
+            get
+            {
+                return grabbedLinks.ToArray();
+            }
         }
 
         public List<uint> ParseFolder(string s)
@@ -242,7 +254,10 @@ namespace MultiloadGrabber
             List<uint> toReturn = new List<uint>();
             foreach (string t in GetFolderContain(s))
                 if ((t.Trim()) != "")
+                {
                     toReturn.Add(parse(t));
+                    grabbedLinks.Add(t);
+                }
             return toReturn;
         }
 
@@ -280,5 +295,51 @@ namespace MultiloadGrabber
         {
             return filefactory.ToArray();
         }
+
+        public void CopyOneServerLinksTo(TextBox box, Server srv)
+        {
+            switch(srv)
+            {
+                case Server.Multishare:
+                    foreach (string s in GetMultiShare())
+                        box.AppendText(s + System.Environment.NewLine);
+                    break;
+                case Server.Hellshare:
+                    foreach (string s in GetHellShare())
+                        box.AppendText(s + System.Environment.NewLine);
+                    break;
+                case Server.Quickshare:
+                    foreach (string s in GetQuickShare())
+                        box.AppendText(s + System.Environment.NewLine);
+                    break;
+               case Server.Rapidshare:
+                    foreach (string s in GetRapidShare())
+                        box.AppendText(s + System.Environment.NewLine);
+                    break;
+                case Server.ShareRapid:
+                    foreach (string s in GetShareRapid())
+                        box.AppendText(s + System.Environment.NewLine);
+                    break;
+               case Server.Ulozto:
+                    foreach (string s in GetUlozTo())
+                        box.AppendText(s + System.Environment.NewLine);
+                    break;
+                case Server.FileFactory:
+                    foreach (string s in GetFileFactory())
+                        box.AppendText(s + System.Environment.NewLine);
+                    break;
+                case Server.CZshare:
+                case Server.XXXXX:
+                    //czshare and XXXXX not aviable
+                    break;
+            }
+        }
+
+        public void CopyLinksTo(TextBox box)
+        {
+            foreach (Server s in Enum.GetValues(typeof(Server)))
+                CopyOneServerLinksTo(box, s);
+        }
+
     }
 }

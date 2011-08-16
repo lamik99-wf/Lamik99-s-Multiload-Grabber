@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
+using LocalConst;
 
 namespace MultiloadGrabber
 {
@@ -87,31 +84,31 @@ namespace MultiloadGrabber
             {
                 DebugLog.Zapis("Parser couldn't connect to the Internet. Link checking failed.");
                 return;
-            }
-
-            string[] servers = { "Multishare", "Hellshare", "Quickshare", "Rapidshare", "Share-Rapid", "Uloz.to", "FileFactory" };
+            }           
 
             int max = 7;
 
-            linkCheckerResults.RowCount = p.filefactory.Count;
+            string[] grabbed = p.GrabbedLinks;
+
+            linkCheckerResults.RowCount = grabbed.Length;
             linkCheckerResults.ColumnCount = 7;
             linkCheckerResults.CurrentCell = null;
             linkCheckerResults.ClearSelection();
-            for (int i = 0; i < inputLinks.Lines.Length; i++)
+            for (int i = 0; i < grabbed.Length; i++)
             {
-                if (inputLinks.Lines[i].Length < 30)
-                    linkCheckerResults.Rows[i].HeaderCell.Value = inputLinks.Lines[i];
+                if (grabbed[i].Length < 30)
+                    linkCheckerResults.Rows[i].HeaderCell.Value = grabbed[i];
                 else
                 {
-                    linkCheckerResults.Rows[i].HeaderCell.Value = "..." + inputLinks.Lines[i].Substring(inputLinks.Lines[i].Length - 27);
-                    linkCheckerResults.Rows[i].HeaderCell.ToolTipText = inputLinks.Lines[i];
+                    linkCheckerResults.Rows[i].HeaderCell.Value = "..." + grabbed[i].Substring(grabbed[i].Length - 27);
+                    linkCheckerResults.Rows[i].HeaderCell.ToolTipText = grabbed[i];
                 }
             }
 
             Task[] ulohy = new Task[7];
             for (int i=0; i<max;i++)
             {
-                linkCheckerResults.Columns[i].HeaderCell.Value = servers[i];
+                linkCheckerResults.Columns[i].HeaderCell.Value = Const.servers[i];
                 if (excludeSR.Checked && i == 4)
                     continue;
                 ulohy[i] = Task.Factory.StartNew(LinkCheckTask, new object[]{p, i, linkCheckerResults});

@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Net;
-using System.IO;
-using System.Threading;
+using LocalConst;
 
 namespace MultiloadGrabber
 {
     public partial class hlavniOkno1 : Form
     {
         public TemplateTable tmpTable;
-
-        enum Servers { CZshare, Hellshare, ShareRapid, Rapidshare, Ulozto, Quickshare, Multishare, XXXXX, FileFactory };
 
         public bool templateChanged = false;
         public int lastSelected = -1;
@@ -72,59 +65,38 @@ namespace MultiloadGrabber
                 {
                     bool[] servers = new bool[9];
                     if (Multishare.Checked)
-                        servers[(int)Servers.Multishare]=true;
+                        servers[(int)Server.Multishare]=true;
                     if (hellshare.Checked)
-                        servers[(int)Servers.Hellshare]=true;
+                        servers[(int)Server.Hellshare]=true;
                     if (Quickshare.Checked)
-                        servers[(int)Servers.Quickshare]=true;
+                        servers[(int)Server.Quickshare]=true;
                     if (Rapidshare.Checked)
-                        servers[(int)Servers.Rapidshare]=true;
+                        servers[(int)Server.Rapidshare]=true;
                     if (Sharerapid.Checked)
-                        servers[(int)Servers.ShareRapid]=true;
+                        servers[(int)Server.ShareRapid]=true;
                     if (Ulozto.Checked)
-                        servers[(int)Servers.Ulozto]=true;
+                        servers[(int)Server.Ulozto]=true;
                     if (FileFactory.Checked)
-                        servers[(int)Servers.FileFactory]=true;
+                        servers[(int)Server.FileFactory]=true;
                     p = new Parser(inputLinks.Lines, servers);
                 }                 
             }
             if (p != null && !p.Failed)
             {
                 if (allServers.Checked || Multishare.Checked)
-                    foreach (string s in p.GetMultiShare())
-                    {
-                        outputLinks.AppendText(s + System.Environment.NewLine);
-                    }
+                    p.CopyOneServerLinksTo(outputLinks, Server.Multishare);
                 if (allServers.Checked || hellshare.Checked)
-                    foreach (string s in p.GetHellShare())
-                    {
-                        outputLinks.AppendText(s + System.Environment.NewLine);
-                    }
+                    p.CopyOneServerLinksTo(outputLinks, Server.Hellshare);
                 if (allServers.Checked || Quickshare.Checked)
-                    foreach (string s in p.GetQuickShare())
-                    {
-                        outputLinks.AppendText(s + System.Environment.NewLine);
-                    }
+                    p.CopyOneServerLinksTo(outputLinks, Server.Quickshare);
                 if (allServers.Checked || Rapidshare.Checked)
-                    foreach (string s in p.GetRapidShare())
-                    {
-                        outputLinks.AppendText(s + System.Environment.NewLine);
-                    }
+                    p.CopyOneServerLinksTo(outputLinks, Server.Rapidshare);
                 if (allServers.Checked || Sharerapid.Checked)
-                    foreach (string s in p.GetShareRapid())
-                    {
-                        outputLinks.AppendText(s + System.Environment.NewLine);
-                    }
+                    p.CopyOneServerLinksTo(outputLinks, Server.ShareRapid);
                 if (allServers.Checked || Ulozto.Checked)
-                    foreach (string s in p.GetUlozTo())
-                    {
-                        outputLinks.AppendText(s + System.Environment.NewLine);
-                    }
+                    p.CopyOneServerLinksTo(outputLinks, Server.Ulozto);
                 if (allServers.Checked || FileFactory.Checked)
-                    foreach (string s in p.GetFileFactory())
-                    {
-                        outputLinks.AppendText(s + System.Environment.NewLine);
-                    }
+                    p.CopyOneServerLinksTo(outputLinks, Server.FileFactory);
             }
             else
                 DebugLog.Zapis("Link grabbing failed - couldn't connect to the Internet");

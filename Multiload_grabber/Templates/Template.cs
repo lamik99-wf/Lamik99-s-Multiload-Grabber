@@ -16,13 +16,19 @@ namespace MultiloadGrabber
         string nazev;
         List<string> sablona;
 
-        public Template(string sNazev, List<string> textSablony)
+        public Template(string sNazev, List<string> textSablony, TemplateTable table, bool newInTable)
         {
             nazev = sNazev;
             sablona = new List<string>();
             if (textSablony != null)
                 foreach (string s in textSablony)
                     sablona.Add(s);
+            if (newInTable)
+            {
+                table.AddTemplate(sNazev);
+                table.Serialize();
+            }
+            TemplateGetterSetter.SetTemplate(this, table);
         }
 
         public List<string> SablonaText

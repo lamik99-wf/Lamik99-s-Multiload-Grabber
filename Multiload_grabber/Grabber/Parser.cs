@@ -39,7 +39,7 @@ namespace MultiloadGrabber
             if (serverArray == null)
                 hash = 0;                
             else
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < Const.multiloadServersCount; i++)
                     if (serverArray[i])
                         hash += (int)Math.Pow(2, i);
             sharerapid = new List<string>();
@@ -54,7 +54,7 @@ namespace MultiloadGrabber
             List<UInt32> IDs = new List<uint>();
             foreach (string s in links)
             {
-                if (s.IndexOf("/slozka/") >= 0)
+                if (s.IndexOf(Const.multiloadFolder) >= 0)
                 {
                     List<UInt32> fromFolder = ParseFolder(s);
                     foreach (uint a in fromFolder)
@@ -91,53 +91,53 @@ namespace MultiloadGrabber
                     splitted[i] = "-";
             }
             int counter = 0;
-            for (int i = 0; i < (IDs.Count * 7); i++)
+            for (int i = 0; i < (IDs.Count * Const.multiloadSupportedServersCount); i++)
             {
                 switch (i / IDs.Count)
                 {
-                    case 0:
+                    case (int)SupportedServers.Hellshare:
                         if ((hash == 0) || serverArray[(int)Server.Hellshare])
                         {
                             hellshare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
-                    case 1:
+                    case (int)SupportedServers.ShareRapid:
                         if ((hash == 0) || serverArray[(int)Server.ShareRapid])
                         {
                             sharerapid.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
-                    case 2:
+                    case (int)SupportedServers.Rapidshare:
                         if ((hash == 0) || serverArray[(int)Server.Rapidshare])
                         {
                             rapidshare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
-                    case 3:
+                    case (int)SupportedServers.Ulozto:
                         if ((hash == 0) || serverArray[(int)Server.Ulozto])
                         {
                             ulozto.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
-                    case 4:
+                    case (int)SupportedServers.Quickshare:
                         if ((hash == 0) || serverArray[(int)Server.Quickshare])
                         {
                             quickshare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
-                    case 5:
+                    case (int)SupportedServers.Multishare:
                         if ((hash == 0) || serverArray[(int)Server.Multishare])
                         {
                             multishare.Add(splitted[counter]);
                             ++counter;
                         }
                         break;
-                    case 6:
+                    case (int)SupportedServers.FileFactory:
                         if ((hash == 0) || serverArray[(int)Server.FileFactory])
                         {
                             filefactory.Add(splitted[counter]);
@@ -154,12 +154,6 @@ namespace MultiloadGrabber
             {
                 return failed;
             }
-        }
-
-        public static string Test()
-        {
-            string[] natest = { "https://rapidshare.com/files/2886134649/mistri_ceskeho_animovaneho_filmu_19-xvid-l99-avi.7z", "http://rapidshare.com/files/455690374/Chytte_zlodeje.MPEG.l99.mpg.7z.001", "http://rapidshare.com/files/455690443/Chytte_zlodeje.MPEG.l99.mpg.7z.002", "http://rapidshare.com/files/455805393/Chytte_zlodeje.MPEG.l99.mpg.7z.003", "http://rapidshare.com/files/455805384/Chytte_zlodeje.MPEG.l99.mpg.7z.004", "http://rapidshare.com/files/455718646/Chytte_zlodeje.MPEG.l99.mpg.7z.005", "http://rapidshare.com/files/455709348/Chytte_zlodeje.MPEG.l99.mpg.7z.006", "https://rapidshare.com/files/2886134649/mistri_ceskeho_animovaneho_filmu_19-xvid-l99-avi.7z" };
-            return LinkChecker.CheckRapidShare(natest).ToString();
         }
 
         public string MultishareString()
@@ -227,17 +221,17 @@ namespace MultiloadGrabber
 
         public UInt32 parse(string s)
         {
-            if (!s.ToLower().Contains("multiload"))
+            if (!s.ToLower().Contains(Const.multiloadValidator))
                 return 0;
-            UInt32 a = Convert.ToUInt32(s.Substring(33, s.IndexOf('/', 33) - 33));
+            UInt32 a = Convert.ToUInt32(s.Substring(Const.multiloadLinkPrefix.Length, s.IndexOf('/', Const.multiloadLinkPrefix.Length) - Const.multiloadLinkPrefix.Length));
             return a;
         }
 
         public static string[] GetFolderContain(string s)
         {
             string text = NetworkHandler.getPageSource(s);
-            int zacatek = text.IndexOf("<textarea"), konec = text.LastIndexOf("</textarea");
-            text = text.Substring(zacatek + Const.textAreaZahlavi.Length, konec - zacatek - Const.textAreaZahlavi.Length);
+            int zacatek = text.IndexOf(Const.textAreaHeader), konec = text.LastIndexOf(Const.textAreaFooter);
+            text = text.Substring(zacatek + Const.textAreaHeader.Length, konec - zacatek - Const.textAreaHeader.Length);
             return text.Split('\n', '\r');
         }
 

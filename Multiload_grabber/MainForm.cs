@@ -36,7 +36,7 @@ namespace MultiloadGrabber
             {
                 foreach (string s in inputLinks.Lines)
                 {
-                    if (s.IndexOf("/slozka/") >= 0)
+                    if (s.IndexOf(Const.multiloadFolder) >= 0)
                         foreach (string t in Parser.GetFolderContain(s))
                             outputLinks.AppendText(t + System.Environment.NewLine);
                 }
@@ -50,8 +50,7 @@ namespace MultiloadGrabber
             {
                 if (templates.Checked)
                 {
-                    Template sabl;
-                    sabl = TemplateGetterSetter.GetTemplate(templateList.Text, tmpTable);
+                    Template sabl = TemplateGetterSetter.GetTemplate(templateList.Text, tmpTable);
                     if (sabl != null)
                     {
                         p = new Parser(inputLinks.Lines, sabl.GetServersIncluded());
@@ -63,7 +62,7 @@ namespace MultiloadGrabber
                 }
                 else
                 {
-                    bool[] servers = new bool[9];
+                    bool[] servers = new bool[Const.multiloadServersCount];
                     if (Multishare.Checked)
                         servers[(int)Server.Multishare]=true;
                     if (hellshare.Checked)
@@ -167,8 +166,7 @@ namespace MultiloadGrabber
                         List<string> sezn = new List<string>();
                         foreach (string s in templateEditBox.Lines)
                             sezn.Add(s);
-                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn);
-                        TemplateGetterSetter.SetTemplate(sabl, tmpTable);
+                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn, tmpTable, false);
                         break;
                 }
             }
@@ -205,8 +203,7 @@ namespace MultiloadGrabber
                             List<string> sezn = new List<string>();
                             foreach (string s in templateEditBox.Lines)
                                 sezn.Add(s);
-                            Template sabl = new Template(templateEditList.Items[lastSelected].ToString(), sezn);
-                            TemplateGetterSetter.SetTemplate(sabl, tmpTable);
+                            Template sabl = new Template(templateEditList.Items[lastSelected].ToString(), sezn, tmpTable, false);
                             break;
                     }
                 }
@@ -314,8 +311,7 @@ namespace MultiloadGrabber
                         List<string> sezn = new List<string>();
                         foreach (string s in templateEditBox.Lines)
                             sezn.Add(s);
-                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn);
-                        TemplateGetterSetter.SetTemplate(sabl, tmpTable);
+                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn, tmpTable, false);
                         break;
                 }
             }
@@ -329,11 +325,8 @@ namespace MultiloadGrabber
                 List<string> sezn= new List<string>();
                 foreach(string s in templateEditBox.Lines)
                     sezn.Add(s);
-                Template sablo = new Template(nazev, sezn);
-                tmpTable.AddTemplate(sablo.Nazev);
-                TemplateGetterSetter.SetTemplate(sablo, tmpTable);
+                Template sablo = new Template(nazev, sezn, tmpTable, true);
                 templateEditList.Items.Add(sablo.Nazev);
-                tmpTable.Serialize();
                 templateChanged = false;
                 templateEditList.SelectedIndex = templateEditList.Items.Count - 1;
             }
@@ -356,8 +349,7 @@ namespace MultiloadGrabber
                         List<string> sezn = new List<string>();
                         foreach (string s in templateEditBox.Lines)
                             sezn.Add(s);
-                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn);
-                        TemplateGetterSetter.SetTemplate(sabl, tmpTable);
+                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn, tmpTable, false);
                         break;
                 }
             }
@@ -367,11 +359,8 @@ namespace MultiloadGrabber
                 List<string> sezn = new List<string>();
                 foreach (string s in templateEditBox.Lines)
                     sezn.Add(s);
-                Template sablo = new Template(nazev, sezn);
-                tmpTable.AddTemplate(sablo.Nazev);
-                TemplateGetterSetter.SetTemplate(sablo, tmpTable);
+                Template sablo = new Template(nazev, sezn, tmpTable, true);
                 templateEditList.Items.Add(sablo.Nazev);
-                tmpTable.Serialize();
                 templateChanged = false;
                 templateEditBox.Clear();
                 templateChanged = false;
@@ -396,8 +385,7 @@ namespace MultiloadGrabber
                         List<string> sezn = new List<string>();
                         foreach (string s in templateEditBox.Lines)
                             sezn.Add(s);
-                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn);
-                        TemplateGetterSetter.SetTemplate(sabl, tmpTable);
+                        Template sabl = new Template(templateEditList.SelectedItem.ToString(), sezn, tmpTable, false);
                         break;
                 }
             }
@@ -405,11 +393,8 @@ namespace MultiloadGrabber
             if (nazev != null && nazev != "")
             {
                 templateEditBox.Clear();
-                Template sablo = new Template(nazev, null);
-                tmpTable.AddTemplate(sablo.Nazev);
-                TemplateGetterSetter.SetTemplate(sablo, tmpTable);
+                Template sablo = new Template(nazev, null, tmpTable, true);
                 templateEditList.Items.Add(sablo.Nazev);
-                tmpTable.Serialize();
                 templateEditBox.Clear();
                 templateEditList.SelectedIndex = templateEditList.Items.Count - 1;
             }
@@ -420,7 +405,7 @@ namespace MultiloadGrabber
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                bool proslo = true;
+                bool passed = true;
                 Template sabl = TemplateGetterSetter.GetTemplate(openFileDialog1.FileName);
                 if (sabl != null)
                 {
@@ -430,13 +415,13 @@ namespace MultiloadGrabber
                             sabl.Nazev = Dialogy.InputDialogBox.Show("Zadejte nový název šablony : ", "", "Multiload Grabber");
                         else
                         {
-                            proslo = false;
+                            passed = false;
                             break;
                         }
                     }
                 }
-                else proslo = false;
-                if (proslo)
+                else passed = false;
+                if (passed)
                 {
                     TemplateGetterSetter.SetTemplate(sabl, tmpTable);
                     templateEditList.Items.Add(sabl.Nazev);
@@ -465,14 +450,11 @@ namespace MultiloadGrabber
                     if (a >= 0 && System.IO.File.Exists(Application.StartupPath + @"/data/Template" + a + ".dat"))
                     {
                         templ = TemplateGetterSetter.GetTemplate(Application.StartupPath + @"/data/Template" + a + ".dat");
-                        templ.Nazev = name;
+                        templ = new Template(name, templ.SablonaText, tmpTable, true);
                         System.IO.File.Delete(Application.StartupPath + @"/data/Template" + a + ".dat");
                         tmpTable.DeleteTemplate(templateEditList.SelectedItem.ToString());
-                        templateEditList.Items.RemoveAt(templateEditList.SelectedIndex);
-                        tmpTable.AddTemplate(name);
-                        TemplateGetterSetter.SetTemplate(templ, tmpTable);
+                        templateEditList.Items.RemoveAt(templateEditList.SelectedIndex);                        
                         templateEditList.Items.Insert(a, templ.Nazev);
-                        tmpTable.Serialize();
                     }
                     else okay = false;
                 }
@@ -491,7 +473,7 @@ namespace MultiloadGrabber
 
         private void debugTestyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Parser.Test());
+            //MessageBox.Show(Parser.Test());
         }
 
         private void linkCheckerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -508,8 +490,7 @@ namespace MultiloadGrabber
 
         private void zkontrolovatAktualizaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            const string changelogURL = "http://mlgrabber.php5.cz/changelog.txt";
-            string s = NetworkHandler.getPageSource(changelogURL);
+            string s = NetworkHandler.getPageSource(Const.changelogURL);
             if (s == "")
             {
                 DebugLog.Zapis("Version check failed - couldn't connect to the Internet.");
@@ -519,7 +500,7 @@ namespace MultiloadGrabber
             if (spl.Length > 0 && spl[0].Trim() != System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
             {
                 if (MessageBox.Show("Nová verze programu je k dispozici! Chcete přejít na domovskou stránku programu?", "Nová verze k dispozici", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    System.Diagnostics.Process.Start("http://sourceforge.net/projects/mlgrabber/");
+                    System.Diagnostics.Process.Start(Const.homepageURL);
             }
             else
             {

@@ -24,6 +24,7 @@ namespace MultiloadGrabber
             }
             catch
             {
+                proud.Close();
                 return null;
             }
             finally

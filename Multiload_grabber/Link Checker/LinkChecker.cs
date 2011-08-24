@@ -10,6 +10,8 @@ namespace MultiloadGrabber
 {
     public class LinkChecker
     {
+        const char unusedChar = '€'; // any character unused in checked links' string, used to create an array via Split method
+
         const string uloztoChecker = "http://www.uloz.to/linkchecker/?do=linkCheckerForm-submit";
         const string uloztoBegin = "<div style=\"margin:10px 0;line-height:20px;\">";
         const string uloztoEnd = "</div>";
@@ -64,7 +66,7 @@ namespace MultiloadGrabber
             if (end == -1 || end < beg)
                 return new bool[links.Length];
             res = res.Substring(beg + uloztoBegin.Length, end - beg - uloztoBegin.Length);
-            string[] spl = res.Split(uloztoSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
+            string[] spl = res.Split(uloztoSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
@@ -96,7 +98,7 @@ namespace MultiloadGrabber
             if (end == -1 || end < beg)
                 return new bool[links.Length];
             res = res.Substring(beg + hellshareBegin.Length, end - beg - hellshareBegin.Length);
-            string[] spl = res.Split(hellshareSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
+            string[] spl = res.Split(hellshareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
@@ -124,7 +126,7 @@ namespace MultiloadGrabber
             int beg = res.IndexOf(multishareBegin);
             int end = res.IndexOf(multishareEnd, beg);
             res = res.Substring(beg + multishareBegin.Length, end - beg - multishareBegin.Length);
-            string[] spl = res.Split(multishareSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
+            string[] spl = res.Split(multishareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {
@@ -153,7 +155,7 @@ namespace MultiloadGrabber
             int beg = res.IndexOf(quickshareBegin);
             int end = res.IndexOf(quickshareEnd, beg);
             res = res.Substring(beg + quickshareBegin.Length, end - beg - quickshareBegin.Length);
-            string[] spl = res.Split(quickshareSplitter.Split('€'), StringSplitOptions.RemoveEmptyEntries);
+            string[] spl = res.Split(quickshareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
             bool[] ret = new bool[links.Length];
             for (int i = 0; i < links.Length; i++)
             {

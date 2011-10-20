@@ -19,12 +19,12 @@ namespace MultiloadGrabber
         const string uloztoOk = "<strong>OK</strong>";
         const string uloztoDead = "<strong>ERROR<strong>";
 
-        const string hellshareChecker = "http://www.hellshare.cz/linkchecker?do=LinkChecker-linkcheckerform-submit";
-        const string hellshareBegin = "<ul id=\"linkchecker_result_list\" style=\"list-style-type:none;\">";
-        const string hellshareEnd = "</ul>";
+        const string hellshareChecker = "http://www.hellshare.cz/linkchecker?do=linkChecker-linkcheckerform-submit";
+        const string hellshareBegin = "<h3>Nalezené soubory</h3>";
+        const string hellshareEnd = "<div id=\"content-outer-bottom\"></div>";
         const string hellshareSplitter = "</li>";
-        const string hellshareOk = "/templates/images/file/icon-file-1-2.png";
-        const string hellshareDead = "/templates/images/file/icon-file-1-1.png";
+        const string hellshareOk = "/assets/img/icons/upload-completed.png";
+        const string hellshareDead = "/assets/img/icons/remove.png";
 
         const string multishareChecker = "http://www.multishare.cz/link-checker/";
         const string multishareBegin = "<h1>Linkchecker</h1>";
@@ -86,11 +86,12 @@ namespace MultiloadGrabber
 
         public static bool[] CheckHellShare(string[] links)
         {
-            string urls = "links=";
+            string urls = "check=Zkontrolovat+dostupnost+soubor%C5%AF&links=";
             foreach (string s in links)
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(hellshareChecker, urls);
+            DebugLog.Zapis(res);
             int beg = res.IndexOf(hellshareBegin);
             if (beg == -1)
                 return new bool[links.Length];                

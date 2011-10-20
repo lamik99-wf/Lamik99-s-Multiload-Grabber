@@ -91,7 +91,6 @@ namespace MultiloadGrabber
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(hellshareChecker, urls);
-            DebugLog.Zapis(res);
             int beg = res.IndexOf(hellshareBegin);
             if (beg == -1)
                 return new bool[links.Length];                

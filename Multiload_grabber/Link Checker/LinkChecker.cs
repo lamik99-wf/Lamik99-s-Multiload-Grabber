@@ -54,16 +54,15 @@ namespace MultiloadGrabber
             {
                 if (links[i] == "-")
                     continue;
-                links[i] = links[i].Substring(0, links[i].LastIndexOf('/'));
+                //links[i] = links[i].Substring(0, links[i].LastIndexOf('/'));
                 urls += (links[i] + "\r\n");
             }
             urls.Trim();
             string res = NetworkHandler.SendPost(uloztoChecker, urls);
+            DebugLog.Zapis(res);
             int beg = res.IndexOf(uloztoBegin);
-            if (beg == -1)
-                return new bool[links.Length];
             int end = res.IndexOf(uloztoEnd, beg);
-            if (end == -1 || end < beg)
+            if (beg == -1 || end == -1 || beg > end)
                 return new bool[links.Length];
             res = res.Substring(beg + uloztoBegin.Length, end - beg - uloztoBegin.Length);
             string[] spl = res.Split(uloztoSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
@@ -91,11 +90,9 @@ namespace MultiloadGrabber
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(hellshareChecker, urls);
-            int beg = res.IndexOf(hellshareBegin);
-            if (beg == -1)
-                return new bool[links.Length];                
+            int beg = res.IndexOf(hellshareBegin);               
             int end = res.IndexOf(hellshareEnd, beg);
-            if (end == -1 || end < beg)
+            if (beg == -1 || end == -1 || beg > end)
                 return new bool[links.Length];
             res = res.Substring(beg + hellshareBegin.Length, end - beg - hellshareBegin.Length);
             string[] spl = res.Split(hellshareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
@@ -125,6 +122,8 @@ namespace MultiloadGrabber
             string res = NetworkHandler.SendPost(multishareChecker, urls);
             int beg = res.IndexOf(multishareBegin);
             int end = res.IndexOf(multishareEnd, beg);
+            if (beg == -1 || end == -1 || beg > end)
+                return new bool[links.Length];
             res = res.Substring(beg + multishareBegin.Length, end - beg - multishareBegin.Length);
             string[] spl = res.Split(multishareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
             bool[] ret = new bool[links.Length];
@@ -148,18 +147,40 @@ namespace MultiloadGrabber
         public static bool[] CheckQuickShare(string[] links)
         {
             string urls = "linky=";
-            foreach (string s in links)
-                urls += (s + "\r\n");
+            bool[] ret = new bool[links.Length];
+            for (int i = 0; i < links.Length; i++)
+            {
+                if (links[i] == "-")
+                {
+                    ret[i] = true;
+                    continue;
+                }
+                else
+                {
+                    urls += (links[i] + "\r\n");
+                    ret[i] = false;
+                }
+            }
             urls.Trim();
             string res = NetworkHandler.SendPost(quickshareChecker, urls);
             int beg = res.IndexOf(quickshareBegin);
             int end = res.IndexOf(quickshareEnd, beg);
+            if (beg == -1 || end == -1 || beg > end)
+                return new bool[links.Length];
             res = res.Substring(beg + quickshareBegin.Length, end - beg - quickshareBegin.Length);
             string[] spl = res.Split(quickshareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
-            bool[] ret = new bool[links.Length];
+
+            int invalid = 0;
+
             for (int i = 0; i < links.Length; i++)
             {
-                if (spl[i].IndexOf(quickshareOk) != -1)
+                if (ret[i])
+                {
+                    ret[i] = false;
+                    ++invalid;
+                    continue;
+                }
+                if (spl[i-invalid].IndexOf(quickshareOk) != -1)
                     ret[i] = true;
                 else ret[i] = false;
             }

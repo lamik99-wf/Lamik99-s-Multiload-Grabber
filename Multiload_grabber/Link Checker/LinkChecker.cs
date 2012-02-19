@@ -59,10 +59,12 @@ namespace MultiloadGrabber
             }
             urls.Trim();
             string res = NetworkHandler.SendPost(uloztoChecker, urls);
-            DebugLog.Zapis(res);
+            //DebugLog.Zapis(res);
             int beg = res.IndexOf(uloztoBegin);
+            if (beg==-1)
+                return new bool[links.Length];
             int end = res.IndexOf(uloztoEnd, beg);
-            if (beg == -1 || end == -1 || beg > end)
+            if (end == -1 || beg > end)
                 return new bool[links.Length];
             res = res.Substring(beg + uloztoBegin.Length, end - beg - uloztoBegin.Length);
             string[] spl = res.Split(uloztoSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
@@ -90,9 +92,11 @@ namespace MultiloadGrabber
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(hellshareChecker, urls);
-            int beg = res.IndexOf(hellshareBegin);               
+            int beg = res.IndexOf(hellshareBegin);
+            if (beg == -1)
+                return new bool[links.Length];   
             int end = res.IndexOf(hellshareEnd, beg);
-            if (beg == -1 || end == -1 || beg > end)
+            if (end == -1 || beg > end)
                 return new bool[links.Length];
             res = res.Substring(beg + hellshareBegin.Length, end - beg - hellshareBegin.Length);
             string[] spl = res.Split(hellshareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
@@ -121,8 +125,10 @@ namespace MultiloadGrabber
             urls.Trim();
             string res = NetworkHandler.SendPost(multishareChecker, urls);
             int beg = res.IndexOf(multishareBegin);
+            if (beg == -1)
+                return new bool[links.Length];
             int end = res.IndexOf(multishareEnd, beg);
-            if (beg == -1 || end == -1 || beg > end)
+            if (end == -1 || beg > end)
                 return new bool[links.Length];
             res = res.Substring(beg + multishareBegin.Length, end - beg - multishareBegin.Length);
             string[] spl = res.Split(multishareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
@@ -164,8 +170,10 @@ namespace MultiloadGrabber
             urls.Trim();
             string res = NetworkHandler.SendPost(quickshareChecker, urls);
             int beg = res.IndexOf(quickshareBegin);
+            if (beg == -1)
+                return new bool[links.Length];
             int end = res.IndexOf(quickshareEnd, beg);
-            if (beg == -1 || end == -1 || beg > end)
+            if (end == -1 || beg > end)
                 return new bool[links.Length];
             res = res.Substring(beg + quickshareBegin.Length, end - beg - quickshareBegin.Length);
             string[] spl = res.Split(quickshareSplitter.Split(unusedChar), StringSplitOptions.RemoveEmptyEntries);
@@ -195,6 +203,8 @@ namespace MultiloadGrabber
             urls.Trim();
             string res = NetworkHandler.SendPost(filefactoryChecker, urls);
             int beg = res.IndexOf(filefactoryBegin);
+            if (beg == -1)
+                return new bool[links.Length];
             int end = res.IndexOf(filefactoryEnd, beg);
             try
             {

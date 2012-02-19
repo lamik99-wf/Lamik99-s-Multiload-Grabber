@@ -508,6 +508,11 @@ namespace MultiloadGrabber
                     MessageBox.Show("Vaše verze programu je aktuální!");
             }
         }
+
+        private void nahlásitChybuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"mailto:lamik99.wf@gmail.com?subject=Multiload Grabber Bug Report");
+        }
     }     
 
     public class DebugLog

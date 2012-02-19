@@ -83,6 +83,7 @@ namespace MultiloadGrabber
                 failed = true;
                 return;
             }
+            //DebugLog.Zapis(ret);
             string[] splitted = ret.Split('\n');
             for (int i = 0; i < splitted.Length; i++)
             {

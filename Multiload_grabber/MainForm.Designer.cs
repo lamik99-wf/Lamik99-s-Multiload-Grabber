@@ -63,21 +63,22 @@
             this.vystupLinky = new System.Windows.Forms.GroupBox();
             this.outputLinks = new System.Windows.Forms.TextBox();
             this.MoznostiPanel = new System.Windows.Forms.GroupBox();
-            this.serverPanel = new System.Windows.Forms.GroupBox();
-            this.Multishare = new System.Windows.Forms.CheckBox();
-            this.hellshare = new System.Windows.Forms.CheckBox();
-            this.Ulozto = new System.Windows.Forms.CheckBox();
-            this.Quickshare = new System.Windows.Forms.CheckBox();
-            this.Sharerapid = new System.Windows.Forms.CheckBox();
-            this.Rapidshare = new System.Windows.Forms.CheckBox();
-            this.FileFactory = new System.Windows.Forms.CheckBox();
+            this.foldersOnly = new System.Windows.Forms.RadioButton();
+            this.templates = new System.Windows.Forms.RadioButton();
+            this.selectServers = new System.Windows.Forms.RadioButton();
+            this.allServers = new System.Windows.Forms.RadioButton();
             this.templateListPanel = new System.Windows.Forms.GroupBox();
             this.templateList = new System.Windows.Forms.ComboBox();
-            this.allServers = new System.Windows.Forms.RadioButton();
-            this.selectServers = new System.Windows.Forms.RadioButton();
-            this.templates = new System.Windows.Forms.RadioButton();
-            this.foldersOnly = new System.Windows.Forms.RadioButton();
+            this.serverPanel = new System.Windows.Forms.GroupBox();
+            this.FileFactory = new System.Windows.Forms.CheckBox();
+            this.Rapidshare = new System.Windows.Forms.CheckBox();
+            this.Sharerapid = new System.Windows.Forms.CheckBox();
+            this.Quickshare = new System.Windows.Forms.CheckBox();
+            this.Ulozto = new System.Windows.Forms.CheckBox();
+            this.hellshare = new System.Windows.Forms.CheckBox();
+            this.Multishare = new System.Windows.Forms.CheckBox();
             this.grabber = new System.Windows.Forms.GroupBox();
+            this.nahlásitChybuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sablonaListContextMenu.SuspendLayout();
             this.templateEditPanel.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -86,8 +87,8 @@
             this.multiLoadLinky.SuspendLayout();
             this.vystupLinky.SuspendLayout();
             this.MoznostiPanel.SuspendLayout();
-            this.serverPanel.SuspendLayout();
             this.templateListPanel.SuspendLayout();
+            this.serverPanel.SuspendLayout();
             this.grabber.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -292,6 +293,7 @@
             // 
             this.nápovědaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.zkontrolovatAktualizaceToolStripMenuItem,
+            this.nahlásitChybuToolStripMenuItem,
             this.oProgramuToolStripMenuItem,
             this.debugTestyToolStripMenuItem});
             this.nápovědaToolStripMenuItem.Name = "nápovědaToolStripMenuItem";
@@ -394,92 +396,50 @@
             this.MoznostiPanel.TabStop = false;
             this.MoznostiPanel.Text = "Možnosti";
             // 
-            // serverPanel
+            // foldersOnly
             // 
-            this.serverPanel.Controls.Add(this.FileFactory);
-            this.serverPanel.Controls.Add(this.Rapidshare);
-            this.serverPanel.Controls.Add(this.Sharerapid);
-            this.serverPanel.Controls.Add(this.Quickshare);
-            this.serverPanel.Controls.Add(this.Ulozto);
-            this.serverPanel.Controls.Add(this.hellshare);
-            this.serverPanel.Controls.Add(this.Multishare);
-            this.serverPanel.Location = new System.Drawing.Point(6, 109);
-            this.serverPanel.Name = "serverPanel";
-            this.serverPanel.Size = new System.Drawing.Size(132, 156);
-            this.serverPanel.TabIndex = 3;
-            this.serverPanel.TabStop = false;
-            this.serverPanel.Text = "Servery";
-            this.serverPanel.Visible = false;
+            this.foldersOnly.AutoSize = true;
+            this.foldersOnly.Location = new System.Drawing.Point(14, 87);
+            this.foldersOnly.Name = "foldersOnly";
+            this.foldersOnly.Size = new System.Drawing.Size(87, 17);
+            this.foldersOnly.TabIndex = 5;
+            this.foldersOnly.TabStop = true;
+            this.foldersOnly.Text = "Pouze složky";
+            this.foldersOnly.UseVisualStyleBackColor = true;
             // 
-            // Multishare
+            // templates
             // 
-            this.Multishare.AutoSize = true;
-            this.Multishare.Location = new System.Drawing.Point(8, 17);
-            this.Multishare.Name = "Multishare";
-            this.Multishare.Size = new System.Drawing.Size(74, 17);
-            this.Multishare.TabIndex = 0;
-            this.Multishare.Text = "Multishare";
-            this.Multishare.UseVisualStyleBackColor = true;
+            this.templates.AutoSize = true;
+            this.templates.Location = new System.Drawing.Point(14, 64);
+            this.templates.Name = "templates";
+            this.templates.Size = new System.Drawing.Size(63, 17);
+            this.templates.TabIndex = 2;
+            this.templates.Text = "Šablony";
+            this.templates.UseVisualStyleBackColor = true;
+            this.templates.CheckedChanged += new System.EventHandler(this.Sablony_CheckedChanged);
             // 
-            // hellshare
+            // selectServers
             // 
-            this.hellshare.AutoSize = true;
-            this.hellshare.Location = new System.Drawing.Point(8, 36);
-            this.hellshare.Name = "hellshare";
-            this.hellshare.Size = new System.Drawing.Size(70, 17);
-            this.hellshare.TabIndex = 1;
-            this.hellshare.Text = "Hellshare";
-            this.hellshare.UseVisualStyleBackColor = true;
+            this.selectServers.AutoSize = true;
+            this.selectServers.Location = new System.Drawing.Point(14, 41);
+            this.selectServers.Name = "selectServers";
+            this.selectServers.Size = new System.Drawing.Size(110, 17);
+            this.selectServers.TabIndex = 1;
+            this.selectServers.Text = "Jednotlivé servery";
+            this.selectServers.UseVisualStyleBackColor = true;
+            this.selectServers.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
-            // Ulozto
+            // allServers
             // 
-            this.Ulozto.AutoSize = true;
-            this.Ulozto.Location = new System.Drawing.Point(8, 111);
-            this.Ulozto.Name = "Ulozto";
-            this.Ulozto.Size = new System.Drawing.Size(59, 17);
-            this.Ulozto.TabIndex = 2;
-            this.Ulozto.Text = "Uloz.to";
-            this.Ulozto.UseVisualStyleBackColor = true;
-            // 
-            // Quickshare
-            // 
-            this.Quickshare.AutoSize = true;
-            this.Quickshare.Location = new System.Drawing.Point(8, 55);
-            this.Quickshare.Name = "Quickshare";
-            this.Quickshare.Size = new System.Drawing.Size(82, 17);
-            this.Quickshare.TabIndex = 3;
-            this.Quickshare.Text = "QuickShare";
-            this.Quickshare.UseVisualStyleBackColor = true;
-            // 
-            // Sharerapid
-            // 
-            this.Sharerapid.AutoSize = true;
-            this.Sharerapid.Location = new System.Drawing.Point(8, 93);
-            this.Sharerapid.Name = "Sharerapid";
-            this.Sharerapid.Size = new System.Drawing.Size(85, 17);
-            this.Sharerapid.TabIndex = 4;
-            this.Sharerapid.Text = "Share-Rapid";
-            this.Sharerapid.UseVisualStyleBackColor = true;
-            // 
-            // Rapidshare
-            // 
-            this.Rapidshare.AutoSize = true;
-            this.Rapidshare.Location = new System.Drawing.Point(8, 74);
-            this.Rapidshare.Name = "Rapidshare";
-            this.Rapidshare.Size = new System.Drawing.Size(80, 17);
-            this.Rapidshare.TabIndex = 5;
-            this.Rapidshare.Text = "Rapidshare";
-            this.Rapidshare.UseVisualStyleBackColor = true;
-            // 
-            // FileFactory
-            // 
-            this.FileFactory.AutoSize = true;
-            this.FileFactory.Location = new System.Drawing.Point(8, 129);
-            this.FileFactory.Name = "FileFactory";
-            this.FileFactory.Size = new System.Drawing.Size(77, 17);
-            this.FileFactory.TabIndex = 6;
-            this.FileFactory.Text = "FileFactory";
-            this.FileFactory.UseVisualStyleBackColor = true;
+            this.allServers.AutoSize = true;
+            this.allServers.Checked = true;
+            this.allServers.Location = new System.Drawing.Point(14, 18);
+            this.allServers.Name = "allServers";
+            this.allServers.Size = new System.Drawing.Size(103, 17);
+            this.allServers.TabIndex = 0;
+            this.allServers.TabStop = true;
+            this.allServers.Text = "Všechny servery";
+            this.allServers.UseVisualStyleBackColor = true;
             // 
             // templateListPanel
             // 
@@ -504,50 +464,92 @@
             this.templateList.TabIndex = 0;
             this.templateList.Tag = "";
             // 
-            // allServers
+            // serverPanel
             // 
-            this.allServers.AutoSize = true;
-            this.allServers.Checked = true;
-            this.allServers.Location = new System.Drawing.Point(14, 18);
-            this.allServers.Name = "allServers";
-            this.allServers.Size = new System.Drawing.Size(103, 17);
-            this.allServers.TabIndex = 0;
-            this.allServers.TabStop = true;
-            this.allServers.Text = "Všechny servery";
-            this.allServers.UseVisualStyleBackColor = true;
+            this.serverPanel.Controls.Add(this.FileFactory);
+            this.serverPanel.Controls.Add(this.Rapidshare);
+            this.serverPanel.Controls.Add(this.Sharerapid);
+            this.serverPanel.Controls.Add(this.Quickshare);
+            this.serverPanel.Controls.Add(this.Ulozto);
+            this.serverPanel.Controls.Add(this.hellshare);
+            this.serverPanel.Controls.Add(this.Multishare);
+            this.serverPanel.Location = new System.Drawing.Point(6, 109);
+            this.serverPanel.Name = "serverPanel";
+            this.serverPanel.Size = new System.Drawing.Size(132, 156);
+            this.serverPanel.TabIndex = 3;
+            this.serverPanel.TabStop = false;
+            this.serverPanel.Text = "Servery";
+            this.serverPanel.Visible = false;
             // 
-            // selectServers
+            // FileFactory
             // 
-            this.selectServers.AutoSize = true;
-            this.selectServers.Location = new System.Drawing.Point(14, 41);
-            this.selectServers.Name = "selectServers";
-            this.selectServers.Size = new System.Drawing.Size(110, 17);
-            this.selectServers.TabIndex = 1;
-            this.selectServers.Text = "Jednotlivé servery";
-            this.selectServers.UseVisualStyleBackColor = true;
-            this.selectServers.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.FileFactory.AutoSize = true;
+            this.FileFactory.Location = new System.Drawing.Point(8, 129);
+            this.FileFactory.Name = "FileFactory";
+            this.FileFactory.Size = new System.Drawing.Size(77, 17);
+            this.FileFactory.TabIndex = 6;
+            this.FileFactory.Text = "FileFactory";
+            this.FileFactory.UseVisualStyleBackColor = true;
             // 
-            // templates
+            // Rapidshare
             // 
-            this.templates.AutoSize = true;
-            this.templates.Location = new System.Drawing.Point(14, 64);
-            this.templates.Name = "templates";
-            this.templates.Size = new System.Drawing.Size(63, 17);
-            this.templates.TabIndex = 2;
-            this.templates.Text = "Šablony";
-            this.templates.UseVisualStyleBackColor = true;
-            this.templates.CheckedChanged += new System.EventHandler(this.Sablony_CheckedChanged);
+            this.Rapidshare.AutoSize = true;
+            this.Rapidshare.Location = new System.Drawing.Point(8, 74);
+            this.Rapidshare.Name = "Rapidshare";
+            this.Rapidshare.Size = new System.Drawing.Size(80, 17);
+            this.Rapidshare.TabIndex = 5;
+            this.Rapidshare.Text = "Rapidshare";
+            this.Rapidshare.UseVisualStyleBackColor = true;
             // 
-            // foldersOnly
+            // Sharerapid
             // 
-            this.foldersOnly.AutoSize = true;
-            this.foldersOnly.Location = new System.Drawing.Point(14, 87);
-            this.foldersOnly.Name = "foldersOnly";
-            this.foldersOnly.Size = new System.Drawing.Size(87, 17);
-            this.foldersOnly.TabIndex = 5;
-            this.foldersOnly.TabStop = true;
-            this.foldersOnly.Text = "Pouze složky";
-            this.foldersOnly.UseVisualStyleBackColor = true;
+            this.Sharerapid.AutoSize = true;
+            this.Sharerapid.Location = new System.Drawing.Point(8, 93);
+            this.Sharerapid.Name = "Sharerapid";
+            this.Sharerapid.Size = new System.Drawing.Size(85, 17);
+            this.Sharerapid.TabIndex = 4;
+            this.Sharerapid.Text = "Share-Rapid";
+            this.Sharerapid.UseVisualStyleBackColor = true;
+            // 
+            // Quickshare
+            // 
+            this.Quickshare.AutoSize = true;
+            this.Quickshare.Location = new System.Drawing.Point(8, 55);
+            this.Quickshare.Name = "Quickshare";
+            this.Quickshare.Size = new System.Drawing.Size(82, 17);
+            this.Quickshare.TabIndex = 3;
+            this.Quickshare.Text = "QuickShare";
+            this.Quickshare.UseVisualStyleBackColor = true;
+            // 
+            // Ulozto
+            // 
+            this.Ulozto.AutoSize = true;
+            this.Ulozto.Location = new System.Drawing.Point(8, 111);
+            this.Ulozto.Name = "Ulozto";
+            this.Ulozto.Size = new System.Drawing.Size(59, 17);
+            this.Ulozto.TabIndex = 2;
+            this.Ulozto.Text = "Uloz.to";
+            this.Ulozto.UseVisualStyleBackColor = true;
+            // 
+            // hellshare
+            // 
+            this.hellshare.AutoSize = true;
+            this.hellshare.Location = new System.Drawing.Point(8, 36);
+            this.hellshare.Name = "hellshare";
+            this.hellshare.Size = new System.Drawing.Size(70, 17);
+            this.hellshare.TabIndex = 1;
+            this.hellshare.Text = "Hellshare";
+            this.hellshare.UseVisualStyleBackColor = true;
+            // 
+            // Multishare
+            // 
+            this.Multishare.AutoSize = true;
+            this.Multishare.Location = new System.Drawing.Point(8, 17);
+            this.Multishare.Name = "Multishare";
+            this.Multishare.Size = new System.Drawing.Size(74, 17);
+            this.Multishare.TabIndex = 0;
+            this.Multishare.Text = "Multishare";
+            this.Multishare.UseVisualStyleBackColor = true;
             // 
             // grabber
             // 
@@ -562,6 +564,13 @@
             this.grabber.TabIndex = 3;
             this.grabber.TabStop = false;
             this.grabber.Text = "Grabber odkazů";
+            // 
+            // nahlásitChybuToolStripMenuItem
+            // 
+            this.nahlásitChybuToolStripMenuItem.Name = "nahlásitChybuToolStripMenuItem";
+            this.nahlásitChybuToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.nahlásitChybuToolStripMenuItem.Text = "Nahlásit chybu";
+            this.nahlásitChybuToolStripMenuItem.Click += new System.EventHandler(this.nahlásitChybuToolStripMenuItem_Click);
             // 
             // hlavniOkno1
             // 
@@ -593,9 +602,9 @@
             this.vystupLinky.PerformLayout();
             this.MoznostiPanel.ResumeLayout(false);
             this.MoznostiPanel.PerformLayout();
+            this.templateListPanel.ResumeLayout(false);
             this.serverPanel.ResumeLayout(false);
             this.serverPanel.PerformLayout();
-            this.templateListPanel.ResumeLayout(false);
             this.grabber.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -652,6 +661,7 @@
         private System.Windows.Forms.CheckBox hellshare;
         private System.Windows.Forms.CheckBox Multishare;
         private System.Windows.Forms.GroupBox grabber;
+        private System.Windows.Forms.ToolStripMenuItem nahlásitChybuToolStripMenuItem;
     }
 }
 

@@ -224,7 +224,15 @@ namespace MultiloadGrabber
         {
             if (!s.ToLower().Contains(Const.multiloadValidator))
                 return 0;
-            UInt32 a = Convert.ToUInt32(s.Substring(Const.multiloadLinkPrefix.Length, s.IndexOf('/', Const.multiloadLinkPrefix.Length) - Const.multiloadLinkPrefix.Length));
+            UInt32 a = 0;
+            try
+            {
+                a = Convert.ToUInt32(s.Substring(Const.multiloadLinkPrefix.Length, s.IndexOf('/', Const.multiloadLinkPrefix.Length) - Const.multiloadLinkPrefix.Length));
+            }
+            catch (Exception )
+            {
+                return 0;
+            }
             return a;
         }
 

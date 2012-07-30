@@ -511,7 +511,14 @@ namespace MultiloadGrabber
 
         private void nahlásitChybuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(@"mailto:lamik99.wf@gmail.com?subject=Multiload Grabber Bug Report");
+            try
+            {
+                System.Diagnostics.Process.Start(@"mailto:lamik99.wf@gmail.com?subject=Multiload Grabber Bug Report");
+            }
+            catch (Exception )
+            {
+                MessageBox.Show("Nemáte nastavený žádný e-mail klient!");
+            }
         }
     }     
 

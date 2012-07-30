@@ -13,15 +13,15 @@ namespace MultiloadGrabber
         const char unusedChar = '€'; // any character unused in checked links' string, used to create an array via Split method
 
         const string uloztoChecker = "http://www.uloz.to/linkchecker/?do=linkCheckerForm-submit";
-        const string uloztoBegin = "<div style=\"margin:10px 0;line-height:20px;\">";
-        const string uloztoEnd = "</div>";
-        const string uloztoSplitter = "</a>";
-        const string uloztoOk = "<strong>OK</strong>";
-        const string uloztoDead = "<strong>ERROR<strong>";
+        const string uloztoBegin = "<ul id=\"linkcheckerResult\">";
+        const string uloztoEnd = "</ul>";
+        const string uloztoSplitter = "</li>";
+        const string uloztoOk = "<li class=\"linkcheckerOk\">";
+        const string uloztoDead = "<li class=\"linkcheckerFail\">";
 
         const string hellshareChecker = "http://www.hellshare.cz/linkchecker?do=linkChecker-linkcheckerform-submit";
         const string hellshareBegin = "<h3>Nalezené soubory</h3>";
-        const string hellshareEnd = "<div id=\"content-outer-bottom\"></div>";
+        const string hellshareEnd = "<div class=\"footer\">";
         const string hellshareSplitter = "</li>";
         const string hellshareOk = "/assets/img/icons/upload-completed.png";
         const string hellshareDead = "/assets/img/icons/remove.png";
@@ -92,6 +92,7 @@ namespace MultiloadGrabber
                 urls += (s + "\r\n");
             urls.Trim();
             string res = NetworkHandler.SendPost(hellshareChecker, urls);
+            DebugLog.Zapis(res);
             int beg = res.IndexOf(hellshareBegin);
             if (beg == -1)
                 return new bool[links.Length];   

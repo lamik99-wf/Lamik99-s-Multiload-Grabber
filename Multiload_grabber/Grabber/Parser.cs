@@ -42,6 +42,8 @@ namespace MultiloadGrabber
                 for (int i = 0; i < Const.multiloadServersCount; i++)
                     if (serverArray[i])
                         hash += (int)Math.Pow(2, i);
+            for (int i = 0; i < links.Length; i++)
+                links[i] = links[i].Trim();
             sharerapid = new List<string>();
             multishare = new List<string>();
             rapidshare = new List<string>();
@@ -83,7 +85,7 @@ namespace MultiloadGrabber
                 failed = true;
                 return;
             }
-            //DebugLog.Zapis(ret);
+            DebugLog.Zapis(ret);
             string[] splitted = ret.Split('\n');
             for (int i = 0; i < splitted.Length; i++)
             {

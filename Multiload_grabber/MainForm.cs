@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using LocalConst;
+using System.IO;
 
 namespace MultiloadGrabber
 {
@@ -526,11 +527,19 @@ namespace MultiloadGrabber
     {
         public static void Zapis(string co)
         {
-            System.IO.FileStream proud = new System.IO.FileStream(@".\debug.txt", System.IO.FileMode.Append, System.IO.FileAccess.Write);
-            System.IO.StreamWriter zapisovac = new System.IO.StreamWriter(proud);
-            zapisovac.WriteLine(co);
-            zapisovac.Close();
-            proud.Close();
+            try
+            {
+
+                System.IO.FileStream proud = new System.IO.FileStream(@".\debug.txt", System.IO.FileMode.Append, System.IO.FileAccess.Write);
+                System.IO.StreamWriter zapisovac = new System.IO.StreamWriter(proud);
+                zapisovac.WriteLine(co);
+                zapisovac.Close();
+                proud.Close();
+            }
+            catch (IOException )
+            {
+                MessageBox.Show("Nezdařený zápis do debug logu!");
+            }
         }
     }
 }

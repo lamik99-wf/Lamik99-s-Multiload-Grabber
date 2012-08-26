@@ -59,7 +59,7 @@ namespace MultiloadGrabber
             }
             urls.Trim();
             string res = NetworkHandler.SendPost(uloztoChecker, urls);
-            //DebugLog.Zapis(res);
+            DebugLog.Zapis(res);
             int beg = res.IndexOf(uloztoBegin);
             if (beg==-1)
                 return new bool[links.Length];
